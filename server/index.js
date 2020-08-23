@@ -51,7 +51,7 @@ const createApp = () => {
 
 const startListening = () => {
     // start listening (and create a 'server' object representing our server)
-    const server = app.listen(PORT, () => console.log(`Seeking on port ${PORT}`))
+    const server = app.listen(PORT, () => console.log(`app is listening on port ${PORT}`))
 }
 
 

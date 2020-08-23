@@ -1,23 +1,18 @@
 const router = require('express').Router()
-const admin = require('firebase-admin');
-const db = require('../db')
 module.exports = router
 
 
-//websitename.com/api/players
+//websitename.com/api/games
+//this route will get all games
 router.get('/', async (req, res, next) => {
     try {
-        let playerSnaps = []
-        const players = await db.collection('Players').get()
-        players.forEach(doc => {
-            playerSnaps.push(doc.data())
-        })
-        res.send(playerSnaps).status(200)
+
     } catch (err) {
         next(err)
     }
 })
 
+//this route will get game data by id
 router.get('/:id', (req, res, next) => {
     try {
 
@@ -26,9 +21,7 @@ router.get('/:id', (req, res, next) => {
     }
 })
 
-
-
-
+//route will add new games to db
 router.post('/', (req, res, next) => {
     try {
 
@@ -37,6 +30,7 @@ router.post('/', (req, res, next) => {
     }
 })
 
+//route will update game via id
 router.put('/:id', (req, res, next) => {
     try {
 
