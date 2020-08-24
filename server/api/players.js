@@ -12,6 +12,7 @@ router.get('/', async (req, res, next) => {
         players.forEach(doc => {
             playerSnaps.push(doc.data())
         })
+        console.log(playerSnaps)
         res.send(playerSnaps).status(200)
     } catch (err) {
         next(err)

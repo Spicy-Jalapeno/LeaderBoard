@@ -7,50 +7,65 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
+import CustomTableCell from './CustomTableCell'
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
     },
 });
 
-function createData(name, wins, losses) {
-    return { name, wins, losses };
+function createData(name,date,players, winners,notes,valid) {
+    return { name,date,players,winners,notes,valid };
 }
 
 
 const rows = [
-    createData('Alex (Spicy Pepper)', 159, 6.0, 24, 4.0),
-    createData('Matt (Sick Fev3R)', 237, 9.0, 37, 4.3),
-    createData('Connor (Con-dog)', 262, 16.0, 24, 6.0),
-    createData('Garrett (Garrett) ', 305, 3.7, 67, 4.3),
+    createData('Unstable Unicorns', 'Aug 23, 2020 8:30 pm',['connor ','alex ','garrett ', 'matt ','molly'], ['garrett'],'molly could\'ve won', 'true'),
+    createData('Unstable Unicorns', 'Aug 23, 2020 8:30 pm', ['connor ', 'alex ', 'garrett '], ['garrett'],'molly could\'ve won', 'true'),
+    createData('Unstable Unicorns', 'Aug 23, 2020 8:30 pm', ['connor ', 'alex ', 'garrett '], ['garrett'],'molly could\'ve won', 'true'),
+    createData('Unstable Unicorns','Aug 23, 2020 8:30 pm' ,['connor ','alex ','garrett '], ['garrett'],'molly could\'ve won', 'true'),
 
 ];
 
 export default function SimpleTable() {
     const classes = useStyles();
-
+    let i = 0;
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Wins</TableCell>
-                        <TableCell align="right">Losses</TableCell>
+                        <TableCell align='left'>Name</TableCell>
+                        <TableCell align="left">Date</TableCell>
+                        <TableCell align='left'>Players</TableCell>
+                        <TableCell align="left">Winners</TableCell>
+                        <TableCell align='left'>Notes</TableCell>
+                        <TableCell align='left'>Valid Game</TableCell>
 
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
+                        // <TableRow key={row.name}>
+                            <CustomTableCell align='left'
+                                key={i++}
+                                name={row.name}
+                                date={row.date}
+                                players={row.players}
+                                winners={row.winners}
+                                notes={row.notes}
+                                valid={row.valid}
+                            ></CustomTableCell>
+                            /* <TableCell component="th" scope="row">
                                 {row.name}
                             </TableCell>
-                            <TableCell align="right">{row.wins}</TableCell>
-                            <TableCell align="right">{row.losses}</TableCell>
+                            <TableCell align="right">{row.date}</TableCell>
+                            <TableCell align='right'>{row.players}</TableCell>
+                            <TableCell align="right">{row.winners}</TableCell>
+                            <TableCell align="right">{row.notes}</TableCell>
+                            <TableCell align='right'>{row.valid}</TableCell> */
 
-                        </TableRow>
+                        // </TableRow>
                     ))}
                 </TableBody>
             </Table>
