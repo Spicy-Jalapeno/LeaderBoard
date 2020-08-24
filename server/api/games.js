@@ -1,8 +1,4 @@
 const router = require('express').Router()
-<<<<<<< HEAD
-const admin = require('firebase-admin');
-=======
->>>>>>> 0b95dfe6513d651a4c8612e7eb2e8df0e19ee031
 const db = require('../db')
 module.exports = router
 

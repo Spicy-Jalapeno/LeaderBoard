@@ -19,6 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Icon } from '@material-ui/core';
 
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
