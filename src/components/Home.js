@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-<<<<<<< HEAD
+import { Grid, Typography, Card, CardContent, makeStyles, CardMedia } from "@material-ui/core";
 
-
-
-=======
->>>>>>> 0b95dfe6513d651a4c8612e7eb2e8df0e19ee031
+const useStyles = makeStyles({
+	container: {
+		marginTop: "100px"
+	},
+	logo: {
+		height: "100px",
+		width: "250px"
+	},
+	card: {
+		minWidth: "300px",
+		minHeight: "100px",
+		boxShadow: "0px 20px 10px rgba(0, 0, 0, 0.15)"
+	},
+	text: {
+		textAlign: "center"
+	}
+})
 
 const Home = (props) => {
 	//set state for games
-	const [ games, setGames ] = useState([]);
-	const [ players, setPlayers ] = useState([]);
-
+	const [games, setGames] = useState([]);
+	const [players, setPlayers] = useState([]);
+	const classes = useStyles()
 	//useEffect will run on componentMount, anything in here will be called when page loads/reloads/updates
 	useEffect(() => {
 		//since useEffect can't be async itself, you have to define an async fuction and call
@@ -29,15 +42,37 @@ const Home = (props) => {
 			setPlayers(players.data);
 		};
 		//call fetch function
-		fetch();
+		// fetch();
 	}, []);
 
 	//this component doesn't really do much but display the names of the games right now
-	if (games.length > 0) {
-		return <div>{games.map((game) => <div key={game.name}>{game.name}</div>)}</div>;
-	} else {
-		return <div>no games</div>;
-	}
+	// if (games.length > 0) {
+	// 	return <div>{games.map((game) => <div key={game.name}>{game.name}</div>)}</div>;
+	// } else {
+	// 	return <div>no games</div>;
+	// }
+	return (
+		<Grid container direction="column" alignContent="center">
+			<Grid item className={classes.text}>
+				<Typography variant="h1">LeaderBoard</Typography>
+			</Grid>
+			<Grid item className={classes.container}>
+				<Grid container direction="row" justify="space-evenly" spacing={2} >
+					<Grid item>
+						<Card className={classes.card}>
+							<CardContent>
+								<Grid container direction="column" alignItems="center">
+									<Grid item>
+										<img className={classes.logo} src="./assets/mysterium.png" />
+									</Grid>
+								</Grid>
+							</CardContent>
+						</Card>
+					</Grid>
+				</Grid>
+			</Grid>
+		</Grid>
+	)
 };
 
 export default Home;
