@@ -11,7 +11,7 @@ const CustomTableCell = (props) => {
             <TableCell align='left'>{props.players.map(name => `${name} `)}</TableCell>
             <TableCell align='left'>{props.winners.map(name => `${name} `)}</TableCell>
             <TableCell align='left'>{props.notes}</TableCell>
-            <TableCell align='left'>{props.valid}</TableCell>
+           
         </TableRow>
     )
 }
