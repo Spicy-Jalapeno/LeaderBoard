@@ -4,34 +4,37 @@ import { Card, CardContent, Grid, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
 	card: {
-		minWidth: '300px',
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		justifyContent: "center",
+		minWidth: '150px',
 		minHeight: '100px',
-		boxShadow: '0px 20px 10px rgba(0, 0, 0, 0.15)'
+		maxWidth: "150px",
+		maxHeight: '100px',
+		boxShadow: '0px 20px 10px rgba(0, 0, 0, 0.15)',
+		// backgroundColor: "blue"
 	},
 	logo: {
-		height: '100px',
-		width: '250px'
+		maxHeight: '100px',
+		maxWidth: '125px'
 	}
 });
 
-const GameCard = ({ title }) => {
+const GameCard = ({ title, id }) => {
 	const classes = useStyles();
 	return (
-		<motion.div inital="hidden" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+		<motion.div id={id} inital="hidden" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.9 }}>
 			<Card className={classes.card}>
-				<CardContent>
-					<Grid container direction="column" alignItems="center">
-						<Grid item>
-							<motion.img
-								whileHover={{ scale: 1.1 }}
-								whileTap={{ scale: 0.9 }}
-								className={classes.logo}
-								src={`./assets/${title}.png`}
-								alt={`${title} logo`}
-							/>
-						</Grid>
-					</Grid>
-				</CardContent>
+
+				<motion.img
+					whileHover={{ scale: 1.1 }}
+					whileTap={{ scale: 0.9 }}
+					className={classes.logo}
+					src={`./assets/${title}.png`}
+					alt={`${title} logo`}
+				/>
+
 			</Card>
 		</motion.div>
 	);

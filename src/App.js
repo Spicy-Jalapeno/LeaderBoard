@@ -6,7 +6,7 @@ import Routes from './Routes';
 const App = () => {
   return (
     <>
-      <AppBar />
+      {/* <AppBar /> */}
       <Routes />
       {/* <div className="App">
        <AppBar />

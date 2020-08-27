@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Axios from 'axios';
-import { Grid, Typography, makeStyles } from '@material-ui/core';
+import { Grid, Typography, makeStyles, Button } from '@material-ui/core';
 import GameCard from './reusable/GameCard';
+import List from './List'
+import { Link, animateScroll as scroll } from 'react-scroll'
+
 
 const useStyles = makeStyles({
 	container: {
@@ -9,12 +12,20 @@ const useStyles = makeStyles({
 	},
 	text: {
 		textAlign: 'center'
+	},
+	gamesContainer: {
+		maxWidth: "70vw"
 	}
 });
 
+const Section = ({ color, id }) => {
+	return <div id={id} style={{ height: "100vh", width: "100vw", backgroundColor: color }}></div>
+}
+
+
 const Home = (props) => {
 	//set state for games
-	const [ games, setGames ] = useState([]);
+	const [games, setGames] = useState([]);
 	const classes = useStyles();
 	//useEffect will run on componentMount, anything in here will be called when page loads/reloads/updates
 	useEffect(() => {
@@ -34,22 +45,27 @@ const Home = (props) => {
 	}, []);
 
 	return (
-		<Grid container direction="column" alignContent="center">
-			<Grid item className={classes.text}>
-				<Typography variant="h1">LeaderBoard</Typography>
-			</Grid>
-			<Grid item className={classes.container}>
-				<Grid container direction="row" justify="space-evenly" spacing={2}>
-					{games.map((game) => {
-						return (
-							<Grid item>
-								<GameCard title={game.name} />
-							</Grid>
-						);
-					})}
+		<>
+			<Grid container direction="column" alignContent="center">
+				<Grid item className={classes.text}>
+					<Typography variant="h1">LeaderBoard</Typography>
+				</Grid>
+				<Grid item className={classes.container}>
+					<Grid container className={classes.gamesContainer} direction="row" justify="space-evenly" spacing={2}>
+						{games.map((game) => {
+							return (
+								<Grid item>
+									<GameCard title={game.name} />
+								</Grid>
+							);
+						})}
+						{/* <Link activeClass="active" to="test2" spy={true} smooth="true" offset={0} duration={1000}>
+							test
+						</Link> */}
+					</Grid>
 				</Grid>
 			</Grid>
-		</Grid>
+		</>
 	);
 };
 

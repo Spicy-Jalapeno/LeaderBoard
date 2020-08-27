@@ -31,7 +31,7 @@ export default function SimpleTable() {
     const classes = useStyles();
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer id="link" component={Paper}>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
