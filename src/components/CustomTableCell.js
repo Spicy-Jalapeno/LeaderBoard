@@ -3,7 +3,7 @@ import { TableRow, TableCell } from '@material-ui/core'
 
 
 const CustomTableCell = (props) => {
-    console.log(props)
+
     return (
         <TableRow>
             <TableCell align='left'>{props.name}</TableCell>
@@ -11,7 +11,7 @@ const CustomTableCell = (props) => {
             <TableCell align='left'>{props.players.map(name => `${name} `)}</TableCell>
             <TableCell align='left'>{props.winners.map(name => `${name} `)}</TableCell>
             <TableCell align='left'>{props.notes}</TableCell>
-           
+
         </TableRow>
     )
 }
