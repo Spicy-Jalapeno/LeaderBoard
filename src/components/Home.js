@@ -4,6 +4,7 @@ import { Grid, Typography, makeStyles, Button } from '@material-ui/core';
 import GameCard from './reusable/GameCard';
 import List from './List'
 import { Link, animateScroll as scroll } from 'react-scroll'
+import { motion } from 'framer-motion'
 
 
 const useStyles = makeStyles({
@@ -15,15 +16,22 @@ const useStyles = makeStyles({
 		marginTop: '100px'
 	},
 	text: {
-		textAlign: 'center'
+
+		textAlign: 'center',
+
 	},
 	gamesContainer: {
 		maxWidth: "70vw"
 	}
 });
 
-const Section = ({ color, id }) => {
-	return <div id={id} style={{ height: "100vh", width: "100vw", backgroundColor: color }}></div>
+const parents = {
+	loaded: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.1
+		}
+	}
 }
 
 
@@ -50,8 +58,8 @@ const Home = (props) => {
 
 	return (
 		<>
-			<Grid className={classes.mainContainer} container direction="column" alignContent="center" spacing={2} style={{ backgroundColor: "lightblue" }}>
-				<Grid item className={classes.text}>
+			<Grid className={classes.mainContainer} container direction="column" alignItems="center" spacing={2} >
+				<Grid item className={classes.text} >
 					<Typography variant="h1">LeaderBoard</Typography>
 				</Grid>
 				<Grid item className={classes.container}>
@@ -59,7 +67,9 @@ const Home = (props) => {
 						{games.map((game) => {
 							return (
 								<Grid item>
-									<GameCard title={game.name} />
+									<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+										<GameCard title={game.name} />
+									</motion.div>
 								</Grid>
 							);
 						})}
@@ -68,7 +78,7 @@ const Home = (props) => {
 						</Link> */}
 					</Grid>
 				</Grid>
-				<Grid item>
+				<Grid item style={{ width: "80%", marginTop: "100px" }}>
 					<List />
 				</Grid>
 			</Grid>

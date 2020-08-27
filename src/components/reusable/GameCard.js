@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, Grid, makeStyles } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
 	card: {
@@ -21,12 +22,12 @@ const useStyles = makeStyles({
 	}
 });
 
-const GameCard = ({ title, id }) => {
+
+const GameCard = ({ title, id, childVariants }) => {
 	const classes = useStyles();
 	return (
-		<motion.div id={id} inital="hidden" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.9 }}>
+		<motion.div id={id} whileHover={{ scale: 1.1, }} whileTap={{ scale: 0.9 }}>
 			<Card className={classes.card}>
-
 				<motion.img
 					whileHover={{ scale: 1.1 }}
 					whileTap={{ scale: 0.9 }}
@@ -34,7 +35,6 @@ const GameCard = ({ title, id }) => {
 					src={`./assets/${title}.png`}
 					alt={`${title} logo`}
 				/>
-
 			</Card>
 		</motion.div>
 	);
