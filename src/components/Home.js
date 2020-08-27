@@ -7,6 +7,10 @@ import { Link, animateScroll as scroll } from 'react-scroll'
 
 
 const useStyles = makeStyles({
+	mainContainer: {
+		height: '100vh',
+		width: '100vw'
+	},
 	container: {
 		marginTop: '100px'
 	},
@@ -46,7 +50,7 @@ const Home = (props) => {
 
 	return (
 		<>
-			<Grid container direction="column" alignContent="center">
+			<Grid className={classes.mainContainer} container direction="column" alignContent="center" spacing={2} style={{ backgroundColor: "lightblue" }}>
 				<Grid item className={classes.text}>
 					<Typography variant="h1">LeaderBoard</Typography>
 				</Grid>
@@ -64,7 +68,11 @@ const Home = (props) => {
 						</Link> */}
 					</Grid>
 				</Grid>
+				<Grid item>
+					<List />
+				</Grid>
 			</Grid>
+
 		</>
 	);
 };
