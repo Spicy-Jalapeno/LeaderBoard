@@ -64,7 +64,7 @@ const Home = (props) => {
 	return (
 		<>
 			<motion.div className={classes.square} initial={{ opacity: 0, x: -100, height: "0px", width: "0px" }} animate={{ height: "500px", width: "500px", x: -70, y: -150, opacity: 1, rotate: 70 }} transition={{ duration: 1 }} />
-			<motion.div className={classes.square} initial={{ opacity: 0, x: 2000, y: 100, height: "0px", width: "0px" }} animate={{ height: "500px", width: "500px", x: window.innerWidth - 300, opacity: 1, rotate: 70 }} transition={{ duration: 1 }} />
+			<motion.div className={classes.square} initial={{ opacity: 0, x: 2000, y: 100, height: "0px", width: "0px" }} animate={{ height: "500px", width: "500px", x: window.innerWidth - 300, opacity: 1, rotate: -70 }} transition={{ duration: 1 }} />
 			<Grid className={classes.mainContainer} container direction="column" alignItems="center" spacing={2} >
 				<Grid item className={classes.text} >
 					<Typography variant="h1">LeaderBoard</Typography>
