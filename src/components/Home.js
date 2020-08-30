@@ -13,7 +13,7 @@ const useStyles = makeStyles({
 		width: '100vw'
 	},
 	container: {
-		marginTop: '100px'
+		marginTop: '50px'
 	},
 	text: {
 
@@ -27,6 +27,9 @@ const useStyles = makeStyles({
 		position: "absolute",
 		backgroundColor: "lightblue",
 		zIndex: -1
+	},
+	list: {
+		width: "80%", marginTop: "100px" 
 	}
 });
 
@@ -42,7 +45,7 @@ const parents = {
 
 const Home = (props) => {
 	//set state for games
-	const [games, setGames] = useState([]);
+	const [homeData, setHomeData] = useState({ games: [], players: []});
 	const classes = useStyles();
 	//useEffect will run on componentMount, anything in here will be called when page loads/reloads/updates
 	useEffect(() => {
@@ -53,14 +56,14 @@ const Home = (props) => {
 			//I used destructuring here because I knew there was a data object attached to the response
 			//just for readability. Axios is a HTTP client that returns a promise
 			const games = await Axios.get('/api/games');
-
+			const players = await Axios.get('/api/players')
 			//setting state for the new data retrieved
-			setGames(games.data);
+			setHomeData({ games: games.data, players: players.data});
 		};
 		//call fetch function
 		fetch();
 	}, []);
-	console.log(window.innerWidth / 2)
+
 	return (
 		<>
 			<motion.div className={classes.square} initial={{ opacity: 0, x: -100, height: "0px", width: "0px" }} animate={{ height: "500px", width: "500px", x: -70, y: -150, opacity: 1, rotate: 70 }} transition={{ duration: 1 }} />
@@ -71,23 +74,20 @@ const Home = (props) => {
 				</Grid>
 				<Grid item className={classes.container}>
 					<Grid container className={classes.gamesContainer} direction="row" justify="space-evenly" spacing={2}>
-						{games.map((game) => {
+						{homeData.games.map((game) => {
 							return (
-								<Grid item>
+								<Grid item key={game.name}>
 									<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 										<GameCard title={game.name} />
 									</motion.div>
 								</Grid>
 							);
 						})}
-						{/* <Link activeClass="active" to="test2" spy={true} smooth="true" offset={0} duration={1000}>
-							test
-						</Link> */}
 					</Grid>
 				</Grid>
-				<Grid item style={{ width: "80%", marginTop: "100px" }}>
+				<Grid item className={classes.list} >
 					<motion.div initial={{ x: -2000 }} animate={{ x: 0 }} transition={{ duration: 1 }}>
-						<List />
+						<List players={homeData.players} />
 					</motion.div>
 				</Grid>
 			</Grid>
