@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { Grid, Typography, makeStyles, Button } from '@material-ui/core';
+import { Grid, Typography, makeStyles } from '@material-ui/core';
 import GameCard from './reusable/GameCard';
-import List from './List'
+import PlayerTable from './PlayerTable'
 import { Link, animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
+import GameDataTable from './GameDataTable';
 
 
 const useStyles = makeStyles({
@@ -29,23 +30,20 @@ const useStyles = makeStyles({
 		zIndex: -1
 	},
 	list: {
-		width: "80%", marginTop: "100px" 
+		width: "80%",
+		marginTop: "100px",
+		maxHeight: "30%"
 	}
 });
 
-const parents = {
-	loaded: {
-		opacity: 1,
-		transition: {
-			staggerChildren: 0.1
-		}
-	}
+const handleClick = (event) => {
+	console.log(event.target.alt)
 }
 
 
 const Home = (props) => {
 	//set state for games
-	const [homeData, setHomeData] = useState({ games: [], players: []});
+	const [homeData, setHomeData] = useState({ games: [], players: [] });
 	const classes = useStyles();
 	//useEffect will run on componentMount, anything in here will be called when page loads/reloads/updates
 	useEffect(() => {
@@ -58,7 +56,7 @@ const Home = (props) => {
 			const games = await Axios.get('/api/games');
 			const players = await Axios.get('/api/players')
 			//setting state for the new data retrieved
-			setHomeData({ games: games.data, players: players.data});
+			setHomeData({ games: games.data, players: players.data });
 		};
 		//call fetch function
 		fetch();
@@ -66,8 +64,8 @@ const Home = (props) => {
 
 	return (
 		<>
-			<motion.div className={classes.square} initial={{ opacity: 0, x: -100, height: "0px", width: "0px" }} animate={{ height: "500px", width: "500px", x: -70, y: -150, opacity: 1, rotate: 70 }} transition={{ duration: 1 }} />
-			<motion.div className={classes.square} initial={{ opacity: 0, x: 2000, y: 100, height: "0px", width: "0px" }} animate={{ height: "500px", width: "500px", x: window.innerWidth - 300, opacity: 1, rotate: -70 }} transition={{ duration: 1 }} />
+			{/* <motion.div className={classes.square} initial={{ opacity: 0, x: -100, height: "0px", width: "0px" }} animate={{ height: "500px", width: "500px", x: -70, y: -150, opacity: 1, rotate: 70 }} transition={{ duration: 1 }} />
+			<motion.div className={classes.square} initial={{ opacity: 0, x: 2000, y: 100, height: "0px", width: "0px" }} animate={{ height: "500px", width: "500px", x: window.innerWidth - 300, opacity: 1, rotate: -70 }} transition={{ duration: 1 }} /> */}
 			<Grid className={classes.mainContainer} container direction="column" alignItems="center" spacing={2} >
 				<Grid item className={classes.text} >
 					<Typography variant="h1">LeaderBoard</Typography>
@@ -77,20 +75,22 @@ const Home = (props) => {
 						{homeData.games.map((game) => {
 							return (
 								<Grid item key={game.name}>
-									<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-										<GameCard title={game.name} />
-									</motion.div>
+									<Link activeClass="active" to="test1" spy="true" smooth="true" duration={1000} onClick={handleClick}>
+										<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+											<GameCard title={game.name} />
+										</motion.div>
+									</Link>
 								</Grid>
 							);
 						})}
 					</Grid>
 				</Grid>
 				<Grid item className={classes.list} >
-					<motion.div initial={{ x: -2000 }} animate={{ x: 0 }} transition={{ duration: 1 }}>
-						<List players={homeData.players} />
-					</motion.div>
+					{/* some sort of loading wheel maybe */}
+					<PlayerTable data={homeData.players} />
 				</Grid>
 			</Grid>
+			<GameDataTable id="test1" />
 
 		</>
 	);
