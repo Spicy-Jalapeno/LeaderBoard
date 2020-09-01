@@ -5,7 +5,7 @@ import GameCard from './reusable/GameCard';
 import PlayerTable from './PlayerTable'
 import { Link, animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
-import GameDataTable from './GameDataTable';
+import TableList from './TableList';
 
 
 const useStyles = makeStyles({
@@ -36,15 +36,19 @@ const useStyles = makeStyles({
 	}
 });
 
-const handleClick = (event) => {
-	console.log(event.target.alt)
-}
+
 
 
 const Home = (props) => {
 	//set state for games
 	const [homeData, setHomeData] = useState({ games: [], players: [] });
+	const [gameName, setGameName] = useState('')
 	const classes = useStyles();
+
+	const handleClick = (event) => {
+		setGameName(event.target.alt)
+	}
+	console.log(gameName)
 	//useEffect will run on componentMount, anything in here will be called when page loads/reloads/updates
 	useEffect(() => {
 		//since useEffect can't be async itself, you have to define an async fuction and call
@@ -75,7 +79,7 @@ const Home = (props) => {
 						{homeData.games.map((game) => {
 							return (
 								<Grid item key={game.name}>
-									<Link activeClass="active" to="test1" spy="true" smooth="true" duration={1000} onClick={handleClick}>
+									<Link activeClass="active" to="test1" spy={true} smooth="true" duration={1000} onClick={handleClick}>
 										<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 											<GameCard title={game.name} />
 										</motion.div>
@@ -90,7 +94,7 @@ const Home = (props) => {
 					<PlayerTable data={homeData.players} />
 				</Grid>
 			</Grid>
-			<GameDataTable id="test1" />
+			<TableList id="test1" name={gameName} />
 
 		</>
 	);

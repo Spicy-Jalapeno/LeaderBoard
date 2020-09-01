@@ -9,17 +9,24 @@ import Modal from './reusable/Modal'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw"
     },
     table: {
         minWidth: 650,
     },
     container: {
+        marginTop: "200px",
         padding: "1rem",
+
     },
     addButton: {
-        alignSelf: 'flex-end',
-        paddingRight: '40px'
+        display: "flex",
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginTop: "25px"
     },
 
 }));
@@ -28,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 const columns = ["Name", "Date", "Players", "Winners", "Notes"]
 
 
-const TableList = () => {
+const TableList = ({ id }) => {
     const [playedGames, setPlayedGames] = useState([])
     const classes = useStyles();
     let i = 0;
@@ -51,12 +58,12 @@ const TableList = () => {
     }, [])
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} id={id}>
             <div className={classes.container}>
 
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper} style={{ width: "80vw" }}>
 
-                    <Table className={classes.table} aria-label="simple table">
+                    <Table className={classes.table} aria-label="simple table" >
                         <TableHead>
                             <TableRow>
                                 {columns.map(column => <TableCell key={column} align="left">{column}</TableCell>)}
@@ -76,15 +83,16 @@ const TableList = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </div>
+                {/* </div> */}
 
-            <Modal open={open} close={handleClose} />
+                <Modal open={open} close={handleClose} />
 
 
-            <div className={classes.addButton}>
-                <Fab color="primary" align="left" aria-label="add" onClick={handleOpen}>
-                    <AddIcon />
-                </Fab>
+                <div className={classes.addButton}>
+                    <Fab color="primary" align="left" aria-label="add" onClick={handleOpen} >
+                        <AddIcon />
+                    </Fab>
+                </div>
             </div>
         </div>
     );
