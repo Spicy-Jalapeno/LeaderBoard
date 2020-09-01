@@ -12,12 +12,9 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
-<<<<<<< HEAD
     "framer-motion": "^2.6.0",
-=======
     "date-fns": "^2.16.0",
     "formik": "^2.1.5",
->>>>>>> 1a71d3ff6fbe54fe6ebbef263b020876611e4995
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
