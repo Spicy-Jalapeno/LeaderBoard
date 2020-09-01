@@ -1,14 +1,14 @@
 import React from 'react';
+import './App.css';
 import Nav from './components/Nav'
 import Routes from './Routes';
 const App = () => {
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <Routes />
       {/* <div className="App">
        <AppBar />
-       <List />
      </div> */}
     </>
   );
