@@ -1,5 +1,6 @@
 import { Modal as ModalTest, makeStyles } from '@material-ui/core'
 import React, { useState } from 'react';
+import GamePlayedForm from '../GamePlayedForm';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -31,12 +32,13 @@ const Modal = (props) => {
     const classes = useStyles()
     const [modalStyle] = useState(getModalStyle);
     const body = (
+
         <div style={modalStyle} className={classes.paper}>
-            <h2 id="simple-modal-title">Text in a modal</h2>
-            <p id="simple-modal-description">
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-            <button type="button" onClick={props.close}> close modal</button>
+        
+            <GamePlayedForm />
+        
+            {/* <button type="button" onClick={props.close}> close modal</button>
+         */}
         </div>
     );
     return <ModalTest
