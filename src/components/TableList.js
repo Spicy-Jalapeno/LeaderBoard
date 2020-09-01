@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 const columns = ["Name", "Date", "Players", "Winners", "Notes"]
 
 
-const TableList = ({ id }) => {
+const TableList = ({ id, game }) => {
     const [playedGames, setPlayedGames] = useState([])
     const classes = useStyles();
     let i = 0;
@@ -47,16 +47,17 @@ const TableList = ({ id }) => {
     const handleClose = () => {
         setOpen(false);
     };
+    console.log(game)
 
-
-    useEffect(() => {
-        const fetch = async () => {
-            const { data } = await Axios.get('/api/playedgames')
-            setPlayedGames(data)
-        }
-        fetch()
-    }, [])
-
+    // useEffect(() => {
+    //     const fetch = async () => {
+    //         const { data } = await Axios.get(`/api/playedgames/${game}`)
+    //         console.log(data)
+    //         setPlayedGames(data)
+    //     }
+    //     fetch()
+    // }, [])
+    // console.log(playedGames)
     return (
         <div className={classes.root} id={id}>
             <div className={classes.container}>
@@ -70,7 +71,7 @@ const TableList = ({ id }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {playedGames.map((game) => (
+                            {game.map((game) => (
                                 <CustomTableCell align='left'
                                     key={i++}
                                     name={game.name}
