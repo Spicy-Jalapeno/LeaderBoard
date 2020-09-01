@@ -6,6 +6,7 @@ import PlayerTable from './PlayerTable'
 import { Link, animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
 import TableList from './TableList';
+import { set } from 'date-fns';
 
 
 const useStyles = makeStyles({
@@ -42,13 +43,14 @@ const useStyles = makeStyles({
 const Home = (props) => {
 	//set state for games
 	const [homeData, setHomeData] = useState({ games: [], players: [] });
-	const [gameName, setGameName] = useState('')
+	const [singleGameData, setSingleGameData] = useState([])
 	const classes = useStyles();
 
-	const handleClick = (event) => {
-		setGameName(event.target.alt)
+	const handleClick = async (event) => {
+		const { data } = await Axios.get(`/api/playedgames/${event.target.alt}`)
+		setSingleGameData(data)
 	}
-	console.log(gameName)
+
 	//useEffect will run on componentMount, anything in here will be called when page loads/reloads/updates
 	useEffect(() => {
 		//since useEffect can't be async itself, you have to define an async fuction and call
@@ -94,7 +96,7 @@ const Home = (props) => {
 					<PlayerTable data={homeData.players} />
 				</Grid>
 			</Grid>
-			<TableList id="test1" name={gameName} />
+			<TableList id="test1" game={singleGameData} />
 
 		</>
 	);
