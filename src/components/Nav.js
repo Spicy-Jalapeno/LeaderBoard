@@ -19,6 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Icon } from '@material-ui/core';
 
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -111,7 +112,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Winner & Losers
+            Leaderboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -133,12 +134,12 @@ export default function PersistentDrawerLeft() {
         <List>
           {['Ka-Pow', 'Mysterium', 'Unstable Unicorns', 'Exploding Kittens'].map((text) => (
             <ListItem button key={text}>
-             
+
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
-       
+
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -146,7 +147,7 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
-       
+
       </main>
     </div>
   );
