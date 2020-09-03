@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 650,
     },
     container: {
-        marginTop: "200px",
         padding: "1rem",
 
     },
@@ -47,17 +46,7 @@ const TableList = ({ id, game }) => {
     const handleClose = () => {
         setOpen(false);
     };
-    console.log(game)
 
-    // useEffect(() => {
-    //     const fetch = async () => {
-    //         const { data } = await Axios.get(`/api/playedgames/${game}`)
-    //         console.log(data)
-    //         setPlayedGames(data)
-    //     }
-    //     fetch()
-    // }, [])
-    // console.log(playedGames)
     return (
         <div className={classes.root} id={id}>
             <div className={classes.container}>

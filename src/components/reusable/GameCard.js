@@ -26,7 +26,7 @@ const GameCard = ({ title, id, childVariants }) => {
 	const classes = useStyles();
 	return (
 		<motion.div id={id} whileHover={{ scale: 1.1, }} whileTap={{ scale: 0.9 }}>
-			<Card className={classes.card}>
+			<Card className={classes.card} title={title}>
 				<motion.img
 					whileHover={{ scale: 1.1 }}
 					whileTap={{ scale: 0.9 }}
