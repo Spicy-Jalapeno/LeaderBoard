@@ -7,8 +7,8 @@ function rand() {
 }
 
 function getModalStyle() {
-    const top = 50 + rand();
-    const left = 50 + rand();
+    const top = 20 + rand();
+    const left = 20 + rand();
 
     return {
         top: `${top}%`,
@@ -19,21 +19,25 @@ function getModalStyle() {
 
 const useStyles = makeStyles({
     paper: {
+       
+        
+        outline: 2,
         position: 'absolute',
-        width: 400,
-        // border: '2px solid #000',
-        backgroundColor: 'white',
-        outline: 0
+        top: '35%',
+        left: '40%',
+        margintop: '-50px',
+        marginleft: '-50px',
+        width:400
     },
 })
 
 
 const Modal = (props) => {
     const classes = useStyles()
-    const [modalStyle] = useState(getModalStyle);
+    // const [modalStyle] = useState(getModalStyle);style={modalStyle}
     const body = (
 
-        <div style={modalStyle} className={classes.paper}>
+        <div  className={classes.paper}>
         
             <GamePlayedForm />
         
