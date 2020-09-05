@@ -1,5 +1,6 @@
 const db = require('../db')
 const { DatePicker } = require('@material-ui/pickers')
+const { getLuminance } = require('@material-ui/core')
 const router = require('express').Router()
 module.exports = router
 
@@ -8,9 +9,19 @@ module.exports = router
 router.get('/', async (req, res, next) => {
     try {
         let playedGamesSnaps = []
-        const playedGames = await db.collection('Games Played').orderBy('date', "desc").get()
-        playedGames.forEach(game => playedGamesSnaps.push(game.data()))
-        res.send(playedGamesSnaps).status(200)
+       
+
+        const playedGames = await db.collection('Games Played').get()
+        playedGames.forEach(game => {
+          
+            playedGamesSnaps.push({id:game.id, data:game.data()})
+            
+        })
+        console.log(playedGamesSnaps)
+       
+       
+            res.send(playedGamesSnaps).status(200);
+
     } catch (err) {
         next(err)
     }
@@ -47,6 +58,25 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', (req, res, next) => {
     try {
 
+    } catch (err) {
+
+    }
+})
+
+router.delete('/:id', async(req, res, next) => {
+    try {
+        
+        console.log("hello" +id)
+        const res = await db.collection('Games Played').doc().delete().then(
+            () => {
+                console.log("hello")
+                return res.status(204).send(res);
+        }
+           
+        );
+
+       
+        
     } catch (err) {
 
     }

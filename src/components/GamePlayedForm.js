@@ -115,7 +115,7 @@ const GamePlayedForm = () => {
             winners: winnersName,
             notes: notes
         }
-
+        //posting to the database.
         const result = await Axios.post("/api/playedgames", values);
         //This line reloaded the window(page).
         window.location.reload(false);
