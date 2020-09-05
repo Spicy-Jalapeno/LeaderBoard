@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 
 const PlayerTable = ({ data, type }) => {
 	const classes = useStyles();
-	console.log(data)
 	return (
 		<TableContainer id="link" component={Paper}>
 			<Table className={classes.table} aria-label="simple table">
