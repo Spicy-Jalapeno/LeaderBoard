@@ -98,7 +98,7 @@ const Home = (props) => {
 							<Grid container className={classes.gamesContainer} direction="row" justify="space-evenly" spacing={2}>
 								{homeData.games.map((game) => {
 									return (
-										<Grid item key={game.name} xs={6} md={6} lg={2} xl={2}>
+										<Grid item key={game.name} xs={4} s={2} md={2} lg={2} xl={2}>
 											<Link activeClass="active" to="test1" spy={true} smooth="true" duration={1000} onClick={handleClick}>
 												<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 													<GameCard title={game.name} />

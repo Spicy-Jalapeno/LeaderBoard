@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 		justifyContent: 'center',
 		minWidth: '150px',
 		minHeight: '100px',
-		// maxWidth: '150px',
+		maxWidth: '150px',
 		maxHeight: '100px',
 		boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)'
 		// backgroundColor: "blue"
@@ -29,8 +29,8 @@ const useStyles = makeStyles({
 		maxWidth: '125px'
 	},
 	logoSmall: {
-		maxHeight: '50px',
-		maxWidth: '75px'
+		maxHeight: '40px',
+		maxWidth: '60px'
 	}
 });
 
