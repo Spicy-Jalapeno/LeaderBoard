@@ -16,9 +16,13 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:name', async (req, res, next) => {
     try {
-        
+
+        let playedGamesSnaps = []
+        const playedGames = await db.collection('Games Played').where('name', '==', req.params.name).get()
+        playedGames.forEach(game => playedGamesSnaps.push(game.data()))
+        res.send(playedGamesSnaps).status(200)
     } catch (err) {
 
     }
@@ -26,7 +30,7 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        
+
         const postResult = await db.collection('Games Played')
             .add({
                 name: req.body.name,
@@ -35,13 +39,12 @@ router.post('/', async (req, res, next) => {
                 winners: req.body.winners,
                 notes: req.body.notes
             });
-        
-        console.log(db);
+
         return res.status(200).send(postResult);
-      } catch (error) {
+    } catch (error) {
         console.log(error);
         return res.status(500).send(error);
-      }
+    }
 })
 
 router.put('/:id', (req, res, next) => {
