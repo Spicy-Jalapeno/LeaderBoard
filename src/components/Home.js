@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { Grid, Typography, makeStyles } from '@material-ui/core';
+import { Grid, Typography, makeStyles, useMediaQuery } from '@material-ui/core';
 import GameCard from './reusable/GameCard';
 import PlayerTable from './PlayerTable'
 import { Link, animateScroll as scroll } from 'react-scroll'
@@ -11,11 +11,11 @@ import TableList from './TableList'
 
 const useStyles = makeStyles({
 	homeContainer: {
-		height: '100%',
-		width: '100%',
+		height: '100vh',
+		width: '100vw',
 		// backgroundColor: "red",
 		// overflowY: "scroll"
-		// overflowX: "hidden",
+		// overflowX: "none", 
 		// backgroundColor: "red"
 	},
 	rootContainer: {
@@ -25,12 +25,13 @@ const useStyles = makeStyles({
 		// overflowX: 
 	},
 	container: {
-		marginTop: '50px'
+		marginTop: '25px'
 	},
 	text: {
-
 		textAlign: 'center',
-
+	},
+	size: {
+		fontSize: '3rem'
 	},
 	gamesContainer: {
 		maxWidth: "70vw"
@@ -42,20 +43,20 @@ const useStyles = makeStyles({
 	},
 	list: {
 		width: "80%",
-		marginTop: "100px",
+		marginTop: "50px",
 		maxHeight: "30%"
 	}
 });
 
 
-
-
 const Home = (props) => {
-	//set state for games
+	//set state for games\
+	const isActive = useMediaQuery("(max-width: 375px)")
 	const [homeData, setHomeData] = useState({ games: [], players: [] });
 	const [singleGameData, setSingleGameData] = useState([])
 	const [gameName, setGameName] = useState('')
 	const [clicked, setClicked] = useState(false)
+
 	const classes = useStyles();
 
 	const handleClick = async (event) => {
@@ -87,17 +88,17 @@ const Home = (props) => {
 
 	return (
 		<>
-			<Grid container direction="row" alignItems="center" className={classes.rootContainer}>
+			<Grid container direction="row" alignItems="center" className={classes.rootContainer} >
 				<Grid item className={classes.homeContainer}>
 					<Grid container direction="column" alignItems="center" spacing={2} id="test2"  >
-						<Grid item className={classes.text} >
-							<Typography variant="h1">LeaderBoard</Typography>
+						<Grid item xs={12}>
+							<Typography variant="h1" className={isActive ? classes.size : null}  >LeaderBoard</Typography>
 						</Grid>
 						<Grid item className={classes.container}>
 							<Grid container className={classes.gamesContainer} direction="row" justify="space-evenly" spacing={2}>
 								{homeData.games.map((game) => {
 									return (
-										<Grid item key={game.name}>
+										<Grid item key={game.name} xs={6} md={6} lg={2} xl={2}>
 											<Link activeClass="active" to="test1" spy={true} smooth="true" duration={1000} onClick={handleClick}>
 												<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 													<GameCard title={game.name} />
@@ -114,9 +115,9 @@ const Home = (props) => {
 						</Grid>
 					</Grid>
 				</Grid>
-				{clicked ? <Grid item id="test1" style={{ backgroundColor: "blue" }}>
-					<TableSection game={singleGameData} name={gameName} />
-				</Grid> : null}
+				<Grid item >
+					{clicked ? 	<TableSection game={singleGameData} name={gameName} id="test1" /> : null }
+				</Grid> 
 			</Grid>
 		</>
 	);
