@@ -66,19 +66,13 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', async(req, res, next) => {
     try {
         
-        console.log("hello" +id)
-        const res = await db.collection('Games Played').doc().delete().then(
-            () => {
-                console.log("hello")
-                return res.status(204).send(res);
-        }
-           
-        );
-
-       
+        
+        const response = await db.collection('Games Played').doc(req.params.id).delete()
+        
+       res.status(204).send("Deleted")
         
     } catch (err) {
-
+        return res.status(500).send(error);
     }
 })
 

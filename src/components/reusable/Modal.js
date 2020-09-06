@@ -1,21 +1,21 @@
 import { Modal as ModalTest, makeStyles } from '@material-ui/core'
-import React, { useState } from 'react';
+import React from 'react';
 import GamePlayedForm from '../GamePlayedForm';
 
-function rand() {
-    return Math.round(Math.random() * 20) - 10;
-}
+// function rand() {
+//     return Math.round(Math.random() * 20) - 10;
+// }
 
-function getModalStyle() {
-    const top = 20 + rand();
-    const left = 20 + rand();
+// function getModalStyle() {
+//     const top = 20 + rand();
+//     const left = 20 + rand();
 
-    return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-    };
-}
+//     return {
+//         top: `${top}%`,
+//         left: `${left}%`,
+//         transform: `translate(-${top}%, -${left}%)`,
+//     };
+// }
 
 const useStyles = makeStyles({
     paper: {

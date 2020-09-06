@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
     },
     button: {
-        color: '#DC80F9',
+        
         background: '#D669F0',
         color: '#FFF',
         '&:hover': {
@@ -116,7 +116,7 @@ const GamePlayedForm = () => {
             notes: notes
         }
         //posting to the database.
-        const result = await Axios.post("/api/playedgames", values);
+        await Axios.post("/api/playedgames", values);
         //This line reloaded the window(page).
         window.location.reload(false);
     }
