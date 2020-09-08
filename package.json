@@ -30,6 +30,7 @@
 		"start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
 		"start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
 		"dev": "nodemon ./server -w",
+		"heroku-postbuild": "webpack -p",
 		"build": "react-scripts build"
 	},
 	"eslintConfig": {
