@@ -94,7 +94,7 @@ const Home = (props) => {
 						<Grid item xs={12}>
 							<Typography variant="h1" className={isActive ? classes.size : null}  >LeaderBoard</Typography>
 						</Grid>
-						<Grid item className={classes.container}>
+						{/* <Grid item className={classes.container}>
 							<Grid container className={classes.gamesContainer} direction="row" justify="space-evenly" spacing={2}>
 								{homeData.games.map((game) => {
 									return (
@@ -108,7 +108,7 @@ const Home = (props) => {
 									);
 								})}
 							</Grid>
-						</Grid>
+						</Grid> */}
 						<Grid item className={classes.list} >
 							{/* some sort of loading wheel maybe */}
 							<PlayerTable data={homeData.players} />
