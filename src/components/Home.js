@@ -90,23 +90,25 @@ const Home = (props) => {
 
 	return (
 		<>
-		<div>
-			<Chart chartType='bar' aggType='month' title='Game Session Volume by Month' data={homeData.sessions}></Chart>
-			<Chart chartType='bar' aggType='player' title='Top Players by Win Percentage' data={homeData.players}></Chart>
-		</div>
 			<Grid container direction="row" alignItems="center" className={classes.rootContainer} >
-				<Grid item className={classes.homeContainer}>
-					<Grid container direction="column" alignItems="center" spacing={2} id="test2"  >
-
-						<Grid item className={classes.list} >
+				<Grid item style={{width: "50%"}}>
+					<Chart chartType='bar' aggType='month' title='Game Session Volume by Month' data={homeData.sessions}></Chart>
+				</Grid>
+				<Grid item style={{width: "50%"}}>
+					<Chart chartType='bar' aggType='player' title='Top Players by Win Percentage' data={homeData.players}></Chart>
+				</Grid>
+				{/* <Grid item className={classes.homeContainer}> */}
+					{/* <Grid container direction="column" alignItems="center" spacing={2} id="test2"  > */}
+							
+						{/* <Grid item className={classes.list} > */}
 							{/* some sort of loading wheel maybe */}
-							<PlayerTable data={homeData.players} />
-						</Grid>
-					</Grid>
-				</Grid>
-				<Grid item >
+							{/* <PlayerTable data={homeData.players} /> */}
+						{/* </Grid> */}
+					{/* </Grid> */}
+				{/* </Grid> */}
+				{/* <Grid item >
 					{clicked ? 	<TableSection game={singleGameData} name={gameName} id="test1" /> : null }
-				</Grid>
+				</Grid> */}
 			</Grid>
 		</>
 	);
