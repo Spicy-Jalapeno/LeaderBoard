@@ -27,3 +27,6 @@ firestore.rules
 firestore.indexes.json
 firebase.js
 serviceAccount.json
+
+public/bundle.js
+public/bundle.js.map
