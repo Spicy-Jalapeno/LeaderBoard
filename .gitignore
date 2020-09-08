@@ -30,3 +30,4 @@ serviceAccount.json
 
 public/bundle.js
 public/bundle.js.map
+.env
