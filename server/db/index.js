@@ -1,12 +1,12 @@
-var admin = require("firebase-admin");
+var admin = require('firebase-admin');
 
-var serviceAccount = require("../../serviceAccount.json");
+var serviceAccount = require('../../serviceAccount.json' || process.env.FIREBASE_CONFIG);
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://leaderboard-24aa4.firebaseio.com"
+	credential: admin.credential.cert(serviceAccount),
+	databaseURL: 'https://leaderboard-24aa4.firebaseio.com'
 });
 
 const db = admin.firestore();
 
-module.exports = db
+module.exports = db;
