@@ -146,17 +146,14 @@ const TableList = () => {
                 }
                 actions={[
                     {
-                        icon: props => (
-                            <IconButton
-                                onClick={handleOpen
-                                }
-                            >
-                                <AddBox />
-                            </IconButton>
+                        icon: () => (
+                            // <IconButton >
+                                <AddBox  />
+                            // </IconButton>
                         ),
                         tooltip: "Add New Game",
-                        isFreeAction: true,   
-
+                        isFreeAction: true,
+                        onClick: (event,rowDat) => handleOpen()
                     },
                 ]}
 

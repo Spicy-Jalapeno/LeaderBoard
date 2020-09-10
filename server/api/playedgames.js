@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
             playedGamesSnaps.push({id:game.id, data:game.data()})
             
         })
-        console.log(playedGamesSnaps)
+        // console.log(playedGamesSnaps)
        
        
             res.send(playedGamesSnaps).status(200);
@@ -46,8 +46,8 @@ router.post('/', async (req, res, next) => {
                 winners: req.body.winners,
                 notes: req.body.notes
             });
-        
-        console.log(db);
+        // const loser = db.collection('Players').where(player => (player === req.body.winners && player > ))
+        // console.log(db);
         return res.status(200).send(postResult);
       } catch (error) {
         console.log(error);
@@ -57,11 +57,12 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
     try {
-
+        
     } catch (err) {
 
     }
 })
+
 
 router.delete('/:id', async(req, res, next) => {
     try {

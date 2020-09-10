@@ -8,6 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
+import { arrayIncludes } from '@material-ui/pickers/_helpers/utils';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -67,6 +68,7 @@ function getStyles(name, personName, theme) {
 
 
 
+
 const GamePlayedForm = () => {
     // Arrays  containing response data from GET. 
     const [players, setPlayers] = React.useState([]);
@@ -76,6 +78,7 @@ const GamePlayedForm = () => {
     // Arrays containing names of players and winners from selections.
     const [playersName, setPlayersName] = React.useState([]);
     const [winnersName, setWinnersName] = React.useState([]);
+    const [playerId, setPlayerId] = React.useState([]);
     // String containing input from the notes input field. 
     const [notes, setNotes] = React.useState('');
     //Theme styling. 
@@ -84,14 +87,14 @@ const GamePlayedForm = () => {
     //Method sets the playersName array for use in the players selection.
     // Also the same array is used in the selection for the winners list.  
     const handlePlayersChange = (event) => {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         setPlayersName(event.target.value);
 
     };
     // Method sets the winnersName array for use in the winners value
     // Method is also needed for the onChange function in the winners selection. 
     const handleWinnersChange = (event) => {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         setWinnersName(event.target.value);
 
     };
@@ -105,6 +108,9 @@ const GamePlayedForm = () => {
 
         setPickedGame(event.target.value);
     }
+
+    
+
     // Sumbit that will post to the database and reload the window with the new info. 
     const handleSubmit = async (event) => {
         console.log("submitted");
@@ -113,12 +119,42 @@ const GamePlayedForm = () => {
             name: gamePicked,
             players: playersName,
             winners: winnersName,
-            notes: notes
+            notes: notes,
+            // winnersID: winners,
+            // losersID: losers
         }
+        // console.log(values.winners.length)
         //posting to the database.
-        await Axios.post("/api/playedgames", values);
+         await Axios.post("/api/playedgames", values);
+       
+        
+
+        let indivPlayer = [];
+        let losers = values.players;
+        let winners = values.winners;
+
+        
+        var i = 1;
+        while (losers.length>i) {
+            winners.forEach((winner) => {
+                if (losers[i] === winner) {
+                    losers.splice(i, 1);
+                } else {
+                    i++;
+                }
+            })
+          
+        }
+        
+        console.log("losers")
+        console.log(losers)
+        console.log('Winners')
+        console.log(winners)
+        
+        await Axios.put(`/api/players/`, {winners: winners, losers: losers})
+            
         //This line reloaded the window(page).
-        window.location.reload(false);
+         window.location.reload(false);
     }
 
 
@@ -130,6 +166,7 @@ const GamePlayedForm = () => {
             const playersRes = await Axios.get('/api/players');
             let playersName = [];
             let gamesName = [];
+            let playerId = [];
             // grabbing the name of the games from the response of the database.
             gamesRes.data.forEach(game => {
                 gamesName.push(game.name);
@@ -139,9 +176,12 @@ const GamePlayedForm = () => {
 
             // grabbing the first name from the response of the database. 
             playersRes.data.forEach(player => {
-                playersName.push(player.firstName);
+                // console.log(player.data)
+                playersName.push(player.data.firstName);
+                playerId.push({id:player.id, firstName: player.data.firstName})
             });
-
+            console.log(playerId);
+            setPlayerId(playerId)
             // setting the local playersName array with the database info.
             setPlayers(playersName);
 
@@ -154,7 +194,7 @@ const GamePlayedForm = () => {
                 <FormControl className={classes.formControl}>
                     <InputLabel id="games">Game</InputLabel>
                     <Select
-                        required
+                        // required
                         labelId="game"
                         id="game"
                         placeholder="Game Name"
@@ -223,7 +263,7 @@ const GamePlayedForm = () => {
                 </FormControl>
                 <FormControl className={classes.formControl}>
                     <TextField
-                        required
+                        // required
                         id="notes"
                         label="Notes"
                         placeholder="Write notes here"

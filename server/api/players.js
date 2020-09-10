@@ -1,7 +1,9 @@
 const router = require('express').Router()
 const admin = require('firebase-admin');
 const db = require('../db')
+const increment = admin.firestore.FieldValue.increment(1)
 module.exports = router
+
 
 
 //websitename.com/api/players
@@ -10,9 +12,9 @@ router.get('/', async (req, res, next) => {
         let playerSnaps = []
         const players = await db.collection('Players').get()
         players.forEach(doc => {
-            playerSnaps.push(doc.data())
+            playerSnaps.push({ id: doc.id, data: doc.data() })
         })
-        console.log(playerSnaps)
+        // console.log(playerSnaps)
         res.send(playerSnaps).status(200)
     } catch (err) {
         next(err)
@@ -38,11 +40,62 @@ router.post('/', (req, res, next) => {
     }
 })
 
-router.put('/:id', (req, res, next) => {
+// router.put('/winners/:id',async (req, res, next) => {
+//     try {
+//         console.log(req.params.id);
+
+//         const response = await db.collection('Players').doc(req.params.id).update({ totalWins: increment })
+//         // console.log(response);
+//     } catch (err) {
+
+//     }
+// })
+
+// router.put('/losers/:id',async (req, res, next) => {
+//     try {
+//         console.log(req.params.id);
+//         const response = await db.collection('Players').doc(req.params.id).update({ totalLosses: increment })
+//         // console.log(response);
+//     } catch (err) {
+
+//     }
+
+
+
+// })
+
+router.put('/', async (req, res, next) => {
     try {
+        let winners = req.body.winners;
+        let losers = req.body.losers; 
+        console.log("Winners")
+        console.log(winners);
+        const playersRef = db.collection('Players')
+        winners.forEach(async (winner) => { 
+            
+            let winnerQuer = playersRef.where('firstName', '==', winner).get().then(
+                (snapshot) => { 
+                    snapshot.forEach(doc => { 
+                        playersRef.doc(doc.id).update({totalWins: increment})
+                    })
+                }
+            ); 
+            
+        
+        })
+        losers.forEach(async (loser) => {
+            let loserQuer = playersRef.where('firstName', '==', loser).get().then((snapshot) => {
+                snapshot.forEach(doc => {
+                    playersRef.doc(doc.id).update({ totalLosses: increment });
+                })
+            })
+        })
+      
+        console.log("Losers")
+        console.log(losers)
 
+        // console.log(req.params[1])
     } catch (err) {
-
+        console.log(err)
     }
 })
-
