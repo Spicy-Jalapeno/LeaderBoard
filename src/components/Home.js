@@ -7,6 +7,7 @@ import { Link, animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
 import TableSection from './TableSection';
 import TableList from './TableList'
+import Chart from './Chart.js'
 
 
 const useStyles = makeStyles({
@@ -15,15 +16,17 @@ const useStyles = makeStyles({
 		width: '100vw',
 		// backgroundColor: "red",
 		// overflowY: "scroll"
-		// overflowX: "none", 
+		// overflowX: "none",
 		// backgroundColor: "red"
 		// postiion: "relaive"
 	},
 	rootContainer: {
 		height: "100vh",
 		width: "100vw",
-		// backgroundColor: "red"
-		// overflowX: 
+
+		backgroundColor: "aliceblue"
+		// overflowX:
+
 	},
 	container: {
 		marginTop: '25px'
@@ -53,7 +56,7 @@ const useStyles = makeStyles({
 const Home = (props) => {
 	//set state for games\
 	const isActive = useMediaQuery("(max-width: 375px)")
-	const [homeData, setHomeData] = useState({ games: [], players: [] });
+	const [homeData, setHomeData] = useState({ games: [], sessions: [], players: [] });
 	const [singleGameData, setSingleGameData] = useState([])
 	const [gameName, setGameName] = useState('')
 	const [clicked, setClicked] = useState(false)
@@ -78,9 +81,10 @@ const Home = (props) => {
 			//I used destructuring here because I knew there was a data object attached to the response
 			//just for readability. Axios is a HTTP client that returns a promise
 			const games = await Axios.get('/api/games');
+			const sessions = await Axios.get('/api/playedgames');
 			const players = await Axios.get('/api/players')
 			//setting state for the new data retrieved
-			setHomeData({ games: games.data, players: players.data });
+			setHomeData({ games: games.data, sessions: sessions.data, players: players.data });
 		};
 		//call fetch function
 		// fetch();
@@ -90,35 +94,23 @@ const Home = (props) => {
 	return (
 		<>
 			<Grid container direction="row" alignItems="center" className={classes.rootContainer} >
-				<Grid item className={classes.homeContainer}>
-					<Grid container direction="column" alignItems="center" spacing={2} id="test2"  >
-						{/* <Grid item xs={12}>
-							<Typography variant="h1" className={isActive ? classes.size : null}  >LeaderBoard</Typography>
-						</Grid> */}
-						{/* <Grid item className={classes.container}>
-							<Grid container className={classes.gamesContainer} direction="row" justify="space-evenly" spacing={2}>
-								{homeData.games.map((game) => {
-									return (
-										<Grid item key={game.name} xs={4} s={2} md={2} lg={2} xl={2}>
-											<Link activeClass="active" to="test1" spy={true} smooth="true" duration={1000} onClick={handleClick}>
-												<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-													<GameCard title={game.name} />
-												</motion.div>
-											</Link>
-										</Grid>
-									);
-								})}
-							</Grid>
-						</Grid> */}
-						<Grid item className={classes.list} >
+				<Grid item style={{width: "50%"}}>
+					<Chart chartType='bar' aggType='month' title='Game Session Volume by Month' data={homeData.sessions}></Chart>
+				</Grid>
+				<Grid item style={{width: "50%"}}>
+					<Chart chartType='bar' aggType='player' title='Top Players by Win Percentage' data={homeData.players}></Chart>
+				</Grid>
+				{/* <Grid item className={classes.homeContainer}> */}
+					{/* <Grid container direction="column" alignItems="center" spacing={2} id="test2"  > */}
+						{/* <Grid item className={classes.list} > */}
 							{/* some sort of loading wheel maybe */}
 							{/* <PlayerTable data={homeData.players} /> */}
-						</Grid>
-					</Grid>
-				</Grid>
-				<Grid item >
-					{clicked ? <TableSection game={singleGameData} name={gameName} id="test1" /> : null}
-				</Grid>
+						{/* </Grid> */}
+					{/* </Grid> */}
+				{/* </Grid> */}
+				{/* <Grid item >
+					{clicked ? 	<TableSection game={singleGameData} name={gameName} id="test1" /> : null }
+				</Grid> */}
 			</Grid>
 		</>
 	);
