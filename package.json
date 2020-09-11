@@ -14,11 +14,12 @@
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
 		"axios": "^0.20.0",
-		"framer-motion": "^2.6.0",
 		"date-fns": "^2.16.0",
 		"formik": "^2.1.5",
+		"framer-motion": "^2.6.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
+		"react-hot-loader": "^4.12.21",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "3.4.3",
 		"react-scroll": "^1.8.1"
@@ -26,12 +27,13 @@
 	"scripts": {
 		"build-client": "webpack",
 		"build-client-watch": "webpack -w",
-		"start": "node server",
+		"start": "nodemon -w server",
 		"start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
 		"start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
 		"dev": "nodemon ./server -w",
 		"heroku-postbuild": "webpack -p",
-		"build": "react-scripts build"
+		"build": "react-scripts build",
+		"start-test": "react-scripts start"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -70,6 +72,9 @@
 		"morgan": "^1.10.0",
 		"nodemon": "^2.0.4",
 		"webpack": "^4.16.4",
-		"webpack-cli": "^3.1.0"
+		"webpack-cli": "^3.1.0",
+		"webpack-dev-middleware": "^3.7.2",
+		"webpack-dev-server": "^3.11.0",
+		"webpack-hot-middleware": "^2.25.0"
 	}
 }

@@ -17,11 +17,12 @@ const useStyles = makeStyles({
 		// overflowY: "scroll"
 		// overflowX: "none", 
 		// backgroundColor: "red"
+		// postiion: "relaive"
 	},
 	rootContainer: {
 		height: "100vh",
 		width: "100vw",
-		backgroundColor: "aliceblue"
+		// backgroundColor: "red"
 		// overflowX: 
 	},
 	container: {
@@ -82,7 +83,7 @@ const Home = (props) => {
 			setHomeData({ games: games.data, players: players.data });
 		};
 		//call fetch function
-		fetch();
+		// fetch();
 
 	}, []);
 
@@ -91,9 +92,9 @@ const Home = (props) => {
 			<Grid container direction="row" alignItems="center" className={classes.rootContainer} >
 				<Grid item className={classes.homeContainer}>
 					<Grid container direction="column" alignItems="center" spacing={2} id="test2"  >
-						<Grid item xs={12}>
+						{/* <Grid item xs={12}>
 							<Typography variant="h1" className={isActive ? classes.size : null}  >LeaderBoard</Typography>
-						</Grid>
+						</Grid> */}
 						{/* <Grid item className={classes.container}>
 							<Grid container className={classes.gamesContainer} direction="row" justify="space-evenly" spacing={2}>
 								{homeData.games.map((game) => {
@@ -111,13 +112,13 @@ const Home = (props) => {
 						</Grid> */}
 						<Grid item className={classes.list} >
 							{/* some sort of loading wheel maybe */}
-							<PlayerTable data={homeData.players} />
+							{/* <PlayerTable data={homeData.players} /> */}
 						</Grid>
 					</Grid>
 				</Grid>
 				<Grid item >
-					{clicked ? 	<TableSection game={singleGameData} name={gameName} id="test1" /> : null }
-				</Grid> 
+					{clicked ? <TableSection game={singleGameData} name={gameName} id="test1" /> : null}
+				</Grid>
 			</Grid>
 		</>
 	);
