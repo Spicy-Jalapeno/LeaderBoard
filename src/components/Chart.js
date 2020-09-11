@@ -131,6 +131,14 @@ const Chart = ({ chartType, aggType, title, data }) => {
       const newChartInstance = new Chartjs(chartContainer.current, createChart(chartType, aggType, title, data));
       setChartInstance(newChartInstance);
     }
+  }, []);
+
+  useEffect(() => {
+    if(chartInstance){
+      console.log(chartInstance)
+      chartInstance.config = createChart(chartType, aggType, title, data)
+      chartInstance.update()
+    }
   }, [data]);
 
   return (
