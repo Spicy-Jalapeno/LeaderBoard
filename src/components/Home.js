@@ -18,12 +18,15 @@ const useStyles = makeStyles({
 		// overflowY: "scroll"
 		// overflowX: "none",
 		// backgroundColor: "red"
+		// postiion: "relaive"
 	},
 	rootContainer: {
 		height: "100vh",
 		width: "100vw",
+
 		backgroundColor: "aliceblue"
 		// overflowX:
+
 	},
 	container: {
 		marginTop: '25px'
@@ -84,7 +87,7 @@ const Home = (props) => {
 			setHomeData({ games: games.data, sessions: sessions.data, players: players.data });
 		};
 		//call fetch function
-		fetch();
+		// fetch();
 
 	}, []);
 
@@ -99,7 +102,6 @@ const Home = (props) => {
 				</Grid>
 				{/* <Grid item className={classes.homeContainer}> */}
 					{/* <Grid container direction="column" alignItems="center" spacing={2} id="test2"  > */}
-							
 						{/* <Grid item className={classes.list} > */}
 							{/* some sort of loading wheel maybe */}
 							{/* <PlayerTable data={homeData.players} /> */}
