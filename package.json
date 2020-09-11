@@ -22,7 +22,8 @@
 		"react-hot-loader": "^4.12.21",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "3.4.3",
-		"react-scroll": "^1.8.1"
+		"react-scroll": "^1.8.1",
+		"zustand": "^3.1.1"
 	},
 	"scripts": {
 		"build-client": "webpack",

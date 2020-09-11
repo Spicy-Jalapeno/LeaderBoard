@@ -45,7 +45,7 @@ const Nav = ({ games }) => {
 
       </Grid>
       <div style={{ position: "relative" }}>
-        {clicked ? <Dropdown /> : null}
+        {clicked ? <Dropdown clicked={clicked} /> : null}
       </div>
     </>
   );
