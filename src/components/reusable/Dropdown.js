@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Grid, Typography, Button } from '@material-ui/core'
 import { motion, AnimatePresence } from 'framer-motion'
 import useStore from '../../store'
+import GameCard from './GameCard';
 
 const games = ['1', '2', '3', '4']
 const useStyles = makeStyles({
@@ -17,15 +18,19 @@ const useStyles = makeStyles({
         zIndex: 10,
         width: "300px",
         height: "300px",
-        backgroundColor: "aliceblue",
-        overflowY: "scroll"
+        // backgroundColor: "aliceblue",
+        border: '0.01px solid gray',
+        overflowY: "scroll",
+        borderRadius: "5px",
+        boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.10)"
     },
     item: {
         maxHeight: "50%",
         maxWidth: "50%",
         minHeight: "45%",
         minWidth: "45%",
-        backgroundColor: "blue"
+        margin: "5px"
+        // backgroundColor: "blue"
     }
 
 })
@@ -51,21 +56,19 @@ const item = {
     show: { opacity: 1 }
 }
 
-const Dropdown = ({ clicked }) => {
+const Dropdown = ({ clicked, games }) => {
     const classes = useStyles()
-    // console.log(props)
-    const test = useStore(state => state.test)
     const updateCount = useStore(state => state.updateCounter)
-    console.log(test)
+    console.log(games)
     return (
         <motion.div className={classes.container} variants={variants} initial="hidden" animate="show" >
-            <motion.div className={classes.item} variants={item}><Typography>test</Typography></motion.div>
-            <motion.div className={classes.item} variants={item}><Typography>test</Typography></motion.div>
-            <motion.div className={classes.item} variants={item}><Typography>test</Typography></motion.div>
-            <motion.div className={classes.item} variants={item}><Typography>test</Typography></motion.div>
-            <motion.div className={classes.item} variants={item}><Typography>test</Typography></motion.div>
-            <motion.div className={classes.item} variants={item}><Typography>test</Typography></motion.div>
-            <Button onClick={updateCount}>click</Button>
+            {games.map(game => {
+                return (
+                    <motion.div className={classes.item} variants={item}>
+                        <GameCard title={game.name} />
+                    </motion.div>
+                )
+            })}
         </motion.div>
     );
 }

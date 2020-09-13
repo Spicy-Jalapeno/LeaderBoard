@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Typography, makeStyles, IconButton } from "@material-ui/core";
 import AppsIcon from '@material-ui/icons/Apps';
 import GameCard from "./reusable/GameCard";
 import Dropdown from './reusable/Dropdown'
+import useStore from '../store';
+import { SatelliteSharp } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   nav: {
@@ -22,13 +24,19 @@ const useStyles = makeStyles({
 })
 
 
-const Nav = ({ games }) => {
+const Nav = (props) => {
   const [clicked, setClicked] = useState(false)
   const classes = useStyles()
-
+  const fetch = useStore(state => state.fetchGames)
+  const games = useStore(state => state.games)
   const handleClick = () => {
     setClicked(!clicked)
   }
+  useEffect(() => {
+    fetch();
+  }, [])
+
+  console.log(games)
   return (
     <>
       <Grid container direction="row" className={classes.nav}>
@@ -45,7 +53,7 @@ const Nav = ({ games }) => {
 
       </Grid>
       <div style={{ position: "relative" }}>
-        {clicked ? <Dropdown clicked={clicked} /> : null}
+        {clicked ? <Dropdown clicked={clicked} games={games} /> : null}
       </div>
     </>
   );

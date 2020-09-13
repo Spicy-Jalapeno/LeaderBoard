@@ -8,8 +8,8 @@ const useStyles = makeStyles({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		minWidth: '150px',
-		minHeight: '100px',
+		minWidth: '125px',
+		minHeight: '75px',
 		maxWidth: '150px',
 		maxHeight: '100px',
 		boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)'
@@ -25,8 +25,8 @@ const useStyles = makeStyles({
 		boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)'
 	},
 	logo: {
-		maxHeight: '100px',
-		maxWidth: '125px'
+		maxHeight: '75px',
+		maxWidth: '100px'
 	},
 	logoSmall: {
 		maxHeight: '40px',
