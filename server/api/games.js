@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 
 		// go through each game and push to games array
 		games.forEach((doc) => {
-			console.log(doc.data())
+
 			gamesSnaps.push(doc.data());
 		});
 

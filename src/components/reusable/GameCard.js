@@ -22,7 +22,8 @@ const useStyles = makeStyles({
 		justifyContent: 'center',
 		minHeight: '70px',
 		minWidth: '75px',
-		boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)'
+		boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)',
+		scrollbarWidth: "1px"
 	},
 	logo: {
 		maxHeight: '75px',

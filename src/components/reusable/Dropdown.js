@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Grid, Typography, Button } from '@material-ui/core'
+import { makeStyles, Grid, Typography, Button, colors } from '@material-ui/core'
 import { motion, AnimatePresence } from 'framer-motion'
 import useStore from '../../store'
 import GameCard from './GameCard';
@@ -18,11 +18,18 @@ const useStyles = makeStyles({
         zIndex: 10,
         width: "300px",
         height: "300px",
-        // backgroundColor: "aliceblue",
-        border: '0.01px solid gray',
         overflowY: "scroll",
         borderRadius: "5px",
-        boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.10)"
+        boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.20)",
+        border: ".01px solid lightgray",
+        '&::-webkit-scrollbar': {
+            width: '5px',
+            borderRadius: "5px",
+
+        },
+        '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'gray',
+        }
     },
     item: {
         maxHeight: "50%",

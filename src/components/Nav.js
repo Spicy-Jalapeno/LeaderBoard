@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Typography, makeStyles, IconButton } from "@material-ui/core";
 import AppsIcon from '@material-ui/icons/Apps';
-import GameCard from "./reusable/GameCard";
 import Dropdown from './reusable/Dropdown'
 import useStore from '../store';
-import { SatelliteSharp } from '@material-ui/icons';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
   nav: {
@@ -25,13 +24,21 @@ const useStyles = makeStyles({
 
 
 const Nav = (props) => {
-  const [clicked, setClicked] = useState(false)
+  const [clickedApps, setClickedApps] = useState(false)
+  const [clickedAdd, setClickedAdd] = useState(false)
   const classes = useStyles()
   const fetch = useStore(state => state.fetchGames)
   const games = useStore(state => state.games)
-  const handleClick = () => {
-    setClicked(!clicked)
-  }
+  // const handleClick = (event) => {
+  //   console.log(event.target)
+  //   if (event.target.id === "add") {
+  //     console.log("here")
+  //     setClickedAdd(!clickedAdd)
+  //   } else {
+  //     setClickedApps(!clickedApps)
+  //   }
+  // }
+
   useEffect(() => {
     fetch();
   }, [])
@@ -41,19 +48,21 @@ const Nav = (props) => {
     <>
       <Grid container direction="row" className={classes.nav}>
         <Grid item className={classes.logo}>
-          <Typography>logo</Typography>
+          <Typography>LeaderBoard</Typography>
         </Grid>
-        <Grid item className={classes.item}><Typography>test</Typography></Grid>
-        <Grid item className={classes.item}><Typography>test</Typography></Grid>
         <Grid item className={classes.item}>
-          <IconButton onClick={handleClick}>
+          <IconButton onClick={() => setClickedApps(!clickedApps)} id="apps">
             <AppsIcon />
           </IconButton>
         </Grid>
-
+        <Grid item className={classes.item}>
+          <IconButton onClick={() => setClickedAdd(!clickedAdd)} id="add">
+            <AddIcon />
+          </IconButton>
+        </Grid>
       </Grid>
       <div style={{ position: "relative" }}>
-        {clicked ? <Dropdown clicked={clicked} games={games} /> : null}
+        {clickedApps ? <Dropdown clicked={clickedApps} games={games} /> : null}
       </div>
     </>
   );
