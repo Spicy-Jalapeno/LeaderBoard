@@ -79,7 +79,16 @@ const Home = (props) => {
 			const games = await Axios.get('/api/games');
 			const players = await Axios.get('/api/players')
 			//setting state for the new data retrieved
-			setHomeData({ games: games.data, players: players.data });
+			// players from the get method contains the id and players data in one array. 
+			// this forEach seperates the data of players into an array playersData to use for the homeData array. 
+			// Easier than refactoring everything. 
+			let playersData = [];
+			players.data.forEach(player => {
+				console.log(player.data)
+				playersData.push(player.data);
+			})
+			 setHomeData({ games: games.data, players: playersData });
+			// console.log(players.data)
 		};
 		//call fetch function
 		fetch();
@@ -87,6 +96,7 @@ const Home = (props) => {
 	}, []);
 
 	return (
+		
 		<>
 			<Grid container direction="row" alignItems="center" className={classes.rootContainer} >
 				<Grid item className={classes.homeContainer}>
