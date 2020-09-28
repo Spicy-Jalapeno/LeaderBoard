@@ -44,23 +44,41 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
+<<<<<<< HEAD
         width: 'auto'
+=======
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw"
+>>>>>>> f4f2611ed1c01c9800c17430617e3f2c5fe3f4af
     },
     table: {
         minWidth: 650,
     },
     container: {
         padding: "1rem",
+
     },
     addButton: {
-        alignSelf: 'flex-end',
-        paddingRight: '40px'
+        display: "flex",
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginTop: "25px"
     },
 
 }));
 
+<<<<<<< HEAD
 const TableList = () => {
     const [playedGames, setPlayedGames] = React.useState([])
+=======
+
+const columns = ["Name", "Date", "Players", "Winners", "Notes"]
+
+
+const TableList = ({ id, game }) => {
+    const [playedGames, setPlayedGames] = useState([])
+>>>>>>> f4f2611ed1c01c9800c17430617e3f2c5fe3f4af
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -70,6 +88,7 @@ const TableList = () => {
         setOpen(false);
     };
 
+<<<<<<< HEAD
     useEffect(() => {
         const fetch = async () => {
             const { data } = await Axios.get('/api/playedgames')
@@ -163,6 +182,45 @@ const TableList = () => {
 
 
 
+=======
+    return (
+        <div className={classes.root} id={id}>
+            <div className={classes.container}>
+
+                <TableContainer component={Paper} style={{ width: "80vw" }}>
+
+                    <Table className={classes.table} aria-label="simple table" >
+                        <TableHead>
+                            <TableRow>
+                                {columns.map(column => <TableCell key={column} align="left">{column}</TableCell>)}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {game.map((game) => (
+                                <CustomTableCell align='left'
+                                    key={i++}
+                                    name={game.name}
+                                    date={new Date(game.date._seconds * 1000).toLocaleString('en-US', { month: 'long', weekday: 'long', day: 'numeric' })}
+                                    players={game.players}
+                                    winners={game.winners}
+                                    notes={game.notes}
+                                />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                {/* </div> */}
+
+                <Modal open={open} close={handleClose} />
+
+
+                <div className={classes.addButton}>
+                    <Fab color="primary" align="left" aria-label="add" onClick={handleOpen} >
+                        <AddIcon />
+                    </Fab>
+                </div>
+            </div>
+>>>>>>> f4f2611ed1c01c9800c17430617e3f2c5fe3f4af
         </div>
     );
 }
