@@ -1,5 +1,5 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
+
 import { makeStyles } from '@material-ui/core'
 import { forwardRef, useEffect } from 'react';
 import Axios from 'axios'
@@ -104,6 +104,7 @@ const TableList = () => {
         {
             title: 'Winners',
             field: 'data.winners',
+            render: (rowData) => rowData.data.winners.join(' ')
             
         },
         {

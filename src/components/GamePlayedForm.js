@@ -113,8 +113,7 @@ const GamePlayedForm = () => {
 
     // Sumbit that will post to the database and reload the window with the new info. 
     const handleSubmit = async (event) => {
-        console.log("submitted");
-        event.preventDefault();
+      
         const values = {
             name: gamePicked,
             players: playersName,
@@ -146,15 +145,14 @@ const GamePlayedForm = () => {
           
         }
         
-        console.log("losers")
-        console.log(losers)
-        console.log('Winners')
-        console.log(winners)
+        // console.log("losers")
+        // console.log(losers)
+        // console.log('Winners')
+        // console.log(winners)
         
         await Axios.put(`/api/players/`, {winners: winners, losers: losers})
             
-        //This line reloaded the window(page).
-         window.location.reload(false);
+        
     }
 
 
@@ -194,7 +192,7 @@ const GamePlayedForm = () => {
                 <FormControl className={classes.formControl}>
                     <InputLabel id="games">Game</InputLabel>
                     <Select
-                        // required
+                        required
                         labelId="game"
                         id="game"
                         placeholder="Game Name"
