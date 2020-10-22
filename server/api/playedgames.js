@@ -51,10 +51,6 @@ router.post('/', async (req, res, next) => {
                 winners: req.body.winners,
                 notes: req.body.notes
             });
-<<<<<<< HEAD
-=======
-
->>>>>>> 21e87e20cbbfafc58c2edca7af6137bf0a698c01
         return res.status(200).send(postResult);
     } catch (error) {
         console.log(error);

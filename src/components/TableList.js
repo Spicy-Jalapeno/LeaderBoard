@@ -44,13 +44,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-<<<<<<< HEAD
-        width: 'auto'
-=======
         alignItems: "center",
         height: "100vh",
         width: "100vw"
->>>>>>> 21e87e20cbbfafc58c2edca7af6137bf0a698c01
     },
     table: {
         minWidth: 650,
@@ -68,17 +64,12 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-<<<<<<< HEAD
-const TableList = () => {
-    const [playedGames, setPlayedGames] = React.useState([])
-=======
 
 const columns = ["Name", "Date", "Players", "Winners", "Notes"]
 
 
 const TableList = ({ id, game }) => {
     const [playedGames, setPlayedGames] = useState([])
->>>>>>> 21e87e20cbbfafc58c2edca7af6137bf0a698c01
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -88,100 +79,6 @@ const TableList = ({ id, game }) => {
         setOpen(false);
     };
 
-<<<<<<< HEAD
-    useEffect(() => {
-        const fetch = async () => {
-            const { data } = await Axios.get('/api/playedgames')
-            setPlayedGames(data)
-            // console.log('hello')
-            // console.log(data)
-
-
-        }
-        fetch()
-    }, [])
-    const columns = [
-        {
-            title: 'Name',
-            field: 'data.name',
-            
-        },
-        {
-            title: 'Date',
-            field: 'data.date',
-            type: 'datetime',
-            
-
-            render: (rowData) => { return new Date(rowData.data.date._seconds * 1000).toLocaleString('en-US', { month: 'long', weekday: 'long', day: 'numeric' }) }
-        },
-        {
-            title: 'Players',
-            field: 'data.players',
-            grouping: true,
-            render: (rowData) => rowData.data.players.join(' ')
-        },
-        {
-            title: 'Winners',
-            field: 'data.winners',
-            
-        },
-        {
-            title: 'Notes',
-            field: 'data.notes',
-           
-        },
-    ];
-
-    return (
-        <div className={classes.root}>
-            <MaterialTable
-                icons={tableIcons}
-                columns={columns}
-                data={playedGames}
-                title="Games Played"
-                editable={{
-                    onRowDelete: oldData =>
-                        new Promise((resolve, reject) => {
-                            setTimeout(() => {
-                                const dataDelete = [...playedGames];
-                                const index = oldData.tableData.id;
-                                //    console.log(oldData.tableData.date)
-                                Axios.delete(`/api/playedgames/${oldData.id}`)
-                                    .then(res => {
-                                        //  console.log(res);   
-                                    })
-                                dataDelete.splice(index, 1);
-                                setPlayedGames([...dataDelete]);
-                                resolve();
-                            }, 1000)
-                        }),
-                }}
-                options={{
-                    search: true,
-                    pageSize: 10,
-                    pageSizeOptions: [10, 20],
-                    draggable: false,
-                }
-                }
-                actions={[
-                    {
-                        icon: () => (
-                            // <IconButton >
-                                <AddBox  />
-                            // </IconButton>
-                        ),
-                        tooltip: "Add New Game",
-                        isFreeAction: true,
-                        onClick: (event,rowDat) => handleOpen()
-                    },
-                ]}
-
-            />
-            <Modal open={open} close={handleClose} />
-
-
-
-=======
     return (
         <div className={classes.root} id={id}>
             <div className={classes.container}>
@@ -219,7 +116,6 @@ const TableList = ({ id, game }) => {
                     </Fab>
                 </div>
             </div>
->>>>>>> 21e87e20cbbfafc58c2edca7af6137bf0a698c01
         </div>
     );
 }

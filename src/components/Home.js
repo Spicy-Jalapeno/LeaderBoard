@@ -6,24 +6,24 @@ import PlayerTable from './PlayerTable'
 import { Link, animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
 import TableSection from './TableSection';
-import TableList from './TableList'
+
+import StatCardContainer from './StatCardContainer';
 
 
 const useStyles = makeStyles({
-	homeContainer: {
-		height: '100vh',
-		width: '100vw',
-		// backgroundColor: "red",
-		// overflowY: "scroll"
-		// overflowX: "none", 
-		// backgroundColor: "red"
-		// postiion: "relaive"
-	},
 	rootContainer: {
 		height: "100vh",
 		width: "100vw",
-		// backgroundColor: "red"
-		// overflowX: 
+	},
+	rightContainer: {
+		height: '100vh',
+		width: '85vw',
+		overflowX: "hidden", 
+	},
+	leftContainer: {
+		height: "100vh",
+		width: "15vw",
+		backgroundColor: "green"
 	},
 	container: {
 		marginTop: '25px'
@@ -97,37 +97,19 @@ const Home = (props) => {
 	}, []);
 
 	return (
-		
 		<>
 			<Grid container direction="row" alignItems="center" className={classes.rootContainer} >
-				<Grid item className={classes.homeContainer}>
-					<Grid container direction="column" alignItems="center" spacing={2} id="test2"  >
-						{/* <Grid item xs={12}>
-							<Typography variant="h1" className={isActive ? classes.size : null}  >LeaderBoard</Typography>
-						</Grid> */}
-						{/* <Grid item className={classes.container}>
-							<Grid container className={classes.gamesContainer} direction="row" justify="space-evenly" spacing={2}>
-								{homeData.games.map((game) => {
-									return (
-										<Grid item key={game.name} xs={4} s={2} md={2} lg={2} xl={2}>
-											<Link activeClass="active" to="test1" spy={true} smooth="true" duration={1000} onClick={handleClick}>
-												<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-													<GameCard title={game.name} />
-												</motion.div>
-											</Link>
-										</Grid>
-									);
-								})}
-							</Grid>
-						</Grid> */}
-						<Grid item className={classes.list} >
-							{/* some sort of loading wheel maybe */}
-							{/* <PlayerTable data={homeData.players} /> */}
-						</Grid>
+				<Grid item className={classes.leftContainer}>
+					<Grid container direction="column">
+
 					</Grid>
 				</Grid>
-				<Grid item >
-					{clicked ? <TableSection game={singleGameData} name={gameName} id="test1" /> : null}
+				<Grid item className={classes.rightContainer}>
+					<Grid container direction="column">
+						<Grid item style={{marginTop: "5rem"}}>
+							<StatCardContainer />
+						</Grid>
+					</Grid>
 				</Grid>
 			</Grid>
 		</>

@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     marginTop: "15px",
     padding: "10px",
     alignItems: "center",
-    backgroundColor: "aliceblue",
+    // backgroundColor: "aliceblue",
 
   },
   logo: {
