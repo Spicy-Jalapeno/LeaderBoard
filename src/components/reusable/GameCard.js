@@ -1,36 +1,50 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Card, makeStyles } from '@material-ui/core';
+import { Card, makeStyles, useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles({
-	card: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		justifyContent: "center",
-		minWidth: '150px',
-		minHeight: '100px',
-		maxWidth: "150px",
+	cardBig: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		minWidth: '125px',
+		minHeight: '75px',
+		maxWidth: '150px',
 		maxHeight: '100px',
-		boxShadow: '0px 20px 10px rgba(0, 0, 0, 0.15)',
+		boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)'
 		// backgroundColor: "blue"
 	},
+	cardSmall: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		minHeight: '70px',
+		minWidth: '75px',
+		boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)',
+		scrollbarWidth: "1px"
+	},
 	logo: {
-		maxHeight: '100px',
-		maxWidth: '125px'
+		maxHeight: '75px',
+		maxWidth: '100px'
+	},
+	logoSmall: {
+		maxHeight: '40px',
+		maxWidth: '60px'
 	}
 });
 
-
 const GameCard = ({ title, id, childVariants }) => {
+	const isActive = useMediaQuery('(max-width: 375px)');
 	const classes = useStyles();
 	return (
-		<motion.div id={id} whileHover={{ scale: 1.1, }} whileTap={{ scale: 0.9 }}>
-			<Card className={classes.card}>
+		<motion.div id={id} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+			<Card className={isActive ? classes.cardSmall : classes.cardBig} title={title}>
 				<motion.img
 					whileHover={{ scale: 1.1 }}
 					whileTap={{ scale: 0.9 }}
-					className={classes.logo}
+					className={isActive ? classes.logoSmall : classes.logo}
 					src={`./assets/${title}.png`}
 					alt={`${title}`}
 				/>
