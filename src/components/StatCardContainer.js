@@ -6,7 +6,7 @@ const titles = ["Games Played", "Most Played Game", "Leader"]
 
 const StatCardContainer = (props) => {
     return ( 
-        <Grid container direction="row" justify="center" alignContent="center" style={{ marginLeft: "100px", width: "80vw", height: "15vh"}} spacing={10}>
+        <Grid container direction="row" justify="center" alignContent="center" spacing={5}>
             {titles.map(title => {
                 return (
                     <Grid item>

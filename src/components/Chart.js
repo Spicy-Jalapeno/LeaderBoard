@@ -29,7 +29,8 @@ const Chart = ({ chartType, aggType, title, data }) => {
     if (aggType == 'month') {
     //aggregate game sessions by date
       for (var i = 0; i < data.length; i++) {
-        var d = new Date(data[i].date._seconds*1000)
+        // console.log(data[i])
+        var d = new Date(data[i].data.date._seconds*1000)
 
         if (!aggObj.hasOwnProperty(d.getMonth())) {
           aggObj[d.getMonth()] = 1
