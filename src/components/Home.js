@@ -168,9 +168,9 @@ const Home = (props) => {
 					<StatCardContainer />
 				</Grid>
 				<Grid item xs={12}>
-					<Grid container direction="row" className={classes.graphContainer} spacing={3}>
+					<Grid container direction="row" className={classes.graphContainer} spacing={3} justify="center">
 						<Grid item xs={12} md={8} lg={8} className={classes.leftGraph}>
-							<Chart style={{minHeight: "100px"}} chartType='bar' aggType='month' title='Game Session Volume by Month' data={homeData.sessions}></Chart>
+							<Chart  chartType='bar' aggType='player' title='Game Session Volume by Month' data={homeData.players}></Chart>
 						</Grid>
 						<Grid item xs className={classes.rightGraph}>
 							<Typography>test2</Typography>
