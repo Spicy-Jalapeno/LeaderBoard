@@ -1,57 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { Grid, Typography, makeStyles, useMediaQuery } from '@material-ui/core';
-import GameCard from './reusable/GameCard';
-import PlayerTable from './PlayerTable'
-import { Link, animateScroll as scroll } from 'react-scroll'
-import { motion } from 'framer-motion'
-import TableSection from './TableSection';
-import Chart from './Chart'
-
+import PlayerWinsBarChart from './PlayerWinsBarChart'
 import StatCardContainer from './StatCardContainer';
-
-
-// const useStyles = makeStyles({
-// 	rootContainer: {
-// 		height: "100vh",
-// 		width: "100vw",
-// 	},
-// 	rightContainer: {
-// 		height: '100vh',
-// 		width: '85vw',
-// 		overflowX: "hidden",
-// 	},
-// 	leftContainer: {
-// 		height: "100vh",
-// 		width: "15vw",
-// 		backgroundColor: "green"
-// 	},
-// 	container: {
-// 		marginTop: '25px'
-// 	},
-// 	text: {
-// 		textAlign: 'center',
-// 	},
-// 	size: {
-// 		fontSize: '3rem'
-// 	},
-// 	gamesContainer: {
-// 		maxWidth: "70vw"
-// 	},
-// 	square: {
-// 		position: "absolute",
-// 		backgroundColor: "lightblue",
-// 		zIndex: -1
-// 	},
-// 	list: {
-// 		width: "80%",
-// 		marginTop: "50px",
-// 		maxHeight: "30%"
-// 	},
-// 	nav: {
-
-// 	}
-// });
+import GameDistributionPieChart from './GameDistributionPieChart'
 
 const useStyles = makeStyles({
 	root: {},
@@ -62,13 +14,18 @@ const useStyles = makeStyles({
 		backgroundColor: "lightgreen",
 	},
 	leftGraph: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
 		minHeight: "100%",
-		marginRight: "30px",
-		padding: "40px 40px",
+		
 		borderRadius: "30px",
 		backgroundColor: "aliceblue"
 	},
 	rightGraph: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
 		minHeight: "100%",
 		borderRadius: "30px",
 		padding: "40px 40px",
@@ -132,27 +89,6 @@ const Home = (props) => {
 
 	return (
 		<>
-			  {/* <Grid container direction="row" alignItems="center" className={classes.rootContainer} > */}
-				{/* <Grid item className={classes.leftContainer}>
-					<Grid container direction="column">
-
-					</Grid>
-				</Grid> */}
-				{/* <Grid item className={classes.rightContainer}>
-					<Grid container direction="column" alignContent="center">
-						<Grid item style={{marginTop: "5rem"}}>
-							<StatCardContainer />
-						</Grid>
-						<Grid item>
-							// <Chart chartType='bar' aggType='month' title='Game Session Volume by Month' data={homeData.sessions}></Chart>
-						</Grid>
-						<Grid item>
-							<Chart chartType='bar' aggType='player' title='Top Players by Win Percentage' data={homeData.players}></Chart>
-						</Grid>
-					</Grid>
-				</Grid> */}
-			{/* </Grid> */}
-
 			<Grid container>
 				<Grid item xs={12}>
 					<Grid container direciton="row" justify="space-between">
@@ -169,11 +105,11 @@ const Home = (props) => {
 				</Grid>
 				<Grid item xs={12}>
 					<Grid container direction="row" className={classes.graphContainer} spacing={3} justify="center">
-						<Grid item xs={12} md={8} lg={8} className={classes.leftGraph}>
-							<Chart  chartType='bar' aggType='player' title='Game Session Volume by Month' data={homeData.players}></Chart>
+						<Grid item xs={12} md={8} lg={8} xl={8} className={classes.leftGraph}>
+									<PlayerWinsBarChart data={homeData.players}/>
 						</Grid>
 						<Grid item xs className={classes.rightGraph}>
-							<Typography>test2</Typography>
+							<GameDistributionPieChart data={homeData.sessions} />
 						</Grid>
 					</Grid>
 				</Grid>
