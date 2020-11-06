@@ -20,7 +20,7 @@ const GameDistributionPieChart = ({data}) => {
     }
 
     return (
-        <ResponsiveContainer width="80%" height="80%">
+        <ResponsiveContainer height="95%">
             <PieChart>
                 <Pie data={games} dataKey="played" nameKey="name" cx="50%" cy="50%" outerRadius={100} fill="#8884d8" label >
                     {

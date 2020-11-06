@@ -17,8 +17,7 @@ const useStyles = makeStyles({
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
-		minHeight: "100%",
-		
+		minHeight: "25vh",
 		borderRadius: "30px",
 		backgroundColor: "aliceblue"
 	},
@@ -28,7 +27,7 @@ const useStyles = makeStyles({
 		alignItems: "center",
 		minHeight: "100%",
 		borderRadius: "30px",
-		padding: "40px 40px",
+		// padding: "40px 40px",
 		backgroundColor: "aliceblue"
 	},
 	playersContainer: {
@@ -44,6 +43,9 @@ const useStyles = makeStyles({
 		borderRadius: "30px",
 		// padding: "40px 40px",
 		// marginRight: "30px"
+	},
+	highlight: {
+		backgroundColor: "aliceblue"
 	}
 })
 
@@ -78,52 +80,69 @@ const Home = (props) => {
 			const sessions = await Axios.get('/api/playedgames');
 			const players = await Axios.get('/api/players')
 			//setting state for the new data retrieved
-			console.log(sessions)
 			setHomeData({ games: games.data, sessions: sessions.data, players: players.data });
 		};
 		//call fetch function
-		fetch();
+		fetch()
 		
 
 	}, []);
 
 	return (
 		<>
-			<Grid container>
-				<Grid item xs={12}>
-					<Grid container direciton="row" justify="space-between">
-						<Grid item>
-							<Typography>test l</Typography>
+			<Grid container direction="column" justify="center" alignItems="center">
+				<Grid item xs={12} container justify="space-between">
+					<Grid item>
+						<Typography variant="h4">LeaderBoard</Typography>
+					</Grid>
+					<Grid item>
+						<Typography>test top</Typography>
+					</Grid>
+				</Grid>
+				<Grid item xs={12} container style={{ marginTop: "100px"}}>
+					<Grid item xs={12}>
+						<StatCardContainer />
+					</Grid>
+				</Grid>
+				<Grid item xs={12} container style={{ minHeight: "25vh", marginTop: "50px"}}>
+					<Grid item xs={12} sm={7} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
+							<Typography>Top 5 Players Wins</Typography>
 						</Grid>
-						<Grid item>
-							<Typography>test r</Typography>
+						<Grid item xs={12} style={{ display: "flex", minHeight: "90%", alignItems: "center", justifyContent: "center"}}>
+							<PlayerWinsBarChart data={homeData.players} />
+						</Grid>
+					</Grid>
+					<Grid item sm={1} ></Grid>
+					<Grid item xs={12} sm={4} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
+							<Typography>Total Game Distribution</Typography>
+						</Grid>
+						<Grid item xs={12} style={{ display: "flex", minHeight: "90%", alignItems: "center", justifyContent: "center"}}>
+							<GameDistributionPieChart data={homeData.sessions}/>
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item xs={12} style={{display: "flex", flexDirection: "row", alignContent: "center", marginTop: "50px"}}>
-					<StatCardContainer />
-				</Grid>
-				<Grid item xs={12}>
-					<Grid container direction="row" className={classes.graphContainer} spacing={3} justify="center">
-						<Grid item xs={12} md={8} lg={8} xl={8} className={classes.leftGraph}>
-									<PlayerWinsBarChart data={homeData.players}/>
+				<Grid item xs={12}  direction="row" container style={{minHeight: "40vh", marginTop: "50px"}} justify="center">
+					<Grid item xs={12} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px", padding: "40px 40px"}} container direction="column">
+						<Grid item>
+							<Typography>Players</Typography>
 						</Grid>
-						<Grid item xs className={classes.rightGraph}>
-							<GameDistributionPieChart data={homeData.sessions} />
-						</Grid>
+						{homeData.players.map(player => {
+							return (
+								<Grid item>
+									<Typography>{player.data.firstName}</Typography>
+								</Grid>
+							)
+						})}
 					</Grid>
-				</Grid>
-				<Grid item xs={12}>
-					<Grid container direction="row" justify="center" className={classes.graphContainer} spacing={4}>
-						<Grid item xs={12} sm={4} md={4} lg={4}>
-							<Typography style={{height: "100px", width: "100%", backgroundColor: "red"}}>test left</Typography>
-						</Grid>
-						<Grid item xs={12} sm={4} md={4} lg={4} className={classes.formContainer}>
-							<Typography style={{height: "100px", width: "100%", backgroundColor: "red"}}>test middle</Typography>
-						</Grid>
-						<Grid item xs={12} sm={4} md={4} lg={4}>
-							<Typography style={{height: "100px", width: "100%", backgroundColor: "red"}}>test right</Typography>
-						</Grid>
+					<Grid item xs={1}/>
+					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)" }}>
+						<Typography>Form</Typography>
+					</Grid>
+					<Grid item xs={1}/>
+					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)"}}>
+						<Typography>test3</Typography>
 					</Grid>
 				</Grid>
 			</Grid>
