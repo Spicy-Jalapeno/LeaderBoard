@@ -31,6 +31,7 @@
 	"scripts": {
 		"build-client": "webpack",
 		"build-client-watch": "webpack -w",
+
 		"start": "nodemon -w server",
 		"start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
 		"start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
@@ -80,5 +81,6 @@
 		"webpack-dev-middleware": "^3.7.2",
 		"webpack-dev-server": "^3.11.0",
 		"webpack-hot-middleware": "^2.25.0"
+
 	}
 }

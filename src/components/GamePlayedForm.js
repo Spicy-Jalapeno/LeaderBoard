@@ -162,8 +162,7 @@ const GamePlayedForm = () => {
 
     // Submit that will post to the database and reload the window with the new info. 
     const handleSubmit = async (event) => {
-        console.log("submitted");
-        // event.preventDefault();
+
         const values = {
             name: gamePicked,
             players: playersName,
@@ -195,15 +194,13 @@ const GamePlayedForm = () => {
           
         }
         
-        console.log("losers")
-        console.log(losers)
-        console.log('Winners')
-        console.log(winners)
+        // console.log("losers")
+        // console.log(losers)
+        // console.log('Winners')
+        // console.log(winners)
         
         await Promise.all([Axios.put(`/api/players/`, {winners: winners, losers: losers}), Axios.post("/api/playedgames", values)])
-            
-        //This line reloaded the window(page).
-        //  window.location.reload(false);
+           
     }
 
 
@@ -238,7 +235,6 @@ const GamePlayedForm = () => {
         fetch()
     }, [])
     return (
-
         <Card className={classes.card}>
             <form className={classes.root} onSubmit={handleSubmit}>
                 <FormGroup className={classes.formGroup} >

@@ -1,6 +1,4 @@
 const isDev = process.env.NODE_ENV === 'development';
-// const path = require('path')
-// const webpack = require('webpack')
 
 module.exports = {
 	mode: isDev ? 'development' : 'production',
@@ -12,6 +10,7 @@ module.exports = {
 		path: __dirname,
 		filename: './public/bundle.js'
 	},
+
 	// devServer: {
 	// 	contentBase: path.join(__dirname, '/public'), //serve your static files from here
 	// 	proxy: [ // allows redirect of requests to webpack-dev-server to another destination
@@ -41,4 +40,7 @@ module.exports = {
 		]
 	},
 	// plugins: [new webpack.HotModuleReplacementPlugin()]
+
+	}
+
 };

@@ -4,13 +4,11 @@ const morgan = require('morgan');
 const compression = require('compression');
 const PORT = process.env.PORT || 8080;
 const app = express();
-
 module.exports = app;
 
 const createApp = () => {
 	// logging middleware
 	app.use(morgan('dev'));
-
 	// body parsing middleware
 	app.use(express.json());
 	app.use(express.urlencoded({ extended: true }));
@@ -22,29 +20,6 @@ const createApp = () => {
 	app.use('/api', require('./api'));
 
 	//www.nameofsite.com/api/
-
-	//was trying to enable HMR for webpack but couldn't figure it out lol
-	// const devServerEnabled = true;
-
-	// if (devServerEnabled) {
-	// 	console.log("in here")
-	// 	//reload=true:Enable auto reloading when changing JS files or content
-	// 	//timeout=1000:Time from disconnecting from server to reconnecting
-	// 	config.entry.unshift('webpack-hot-middleware/client?reload=true&timeout=1000');
-
-	// 	//Add HMR plugin
-	// 	// config.plugins.push(new webpack.HotModuleReplacementPlugin());
-
-	// 	const compiler = webpack(config);
-
-	// 	//Enable "webpack-dev-middleware"
-	// 	app.use(webpackDevMiddleware(compiler, {
-	// 		publicPath: config.output.publicPath
-	// 	}));
-
-	// 	//Enable "webpack-hot-middleware"
-	// 	app.use(webpackHotMiddleware(compiler));
-	// }
 
 	// static file-serving middleware
 	app.use(express.static(path.join(__dirname, '..', 'public')));

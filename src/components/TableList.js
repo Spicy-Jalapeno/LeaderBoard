@@ -1,5 +1,5 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
+
 import { makeStyles } from '@material-ui/core'
 import { forwardRef, useEffect } from 'react';
 import Axios from 'axios'
@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         height: "100vh",
         width: "100vw"
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw"
     },
     table: {
         minWidth: 650,
@@ -65,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+const TableList = () => {
+    const [playedGames, setPlayedGames] = React.useState([])
+
+
 const columns = ["Name", "Date", "Players", "Winners", "Notes"]
 
 
@@ -79,6 +86,50 @@ const TableList = ({ id, game }) => {
         setOpen(false);
     };
 
+
+    useEffect(() => {
+        const fetch = async () => {
+            const { data } = await Axios.get('/api/playedgames')
+            setPlayedGames(data)
+            // console.log('hello')
+            // console.log(data)
+
+
+        }
+        fetch()
+    }, [])
+    const columns = [
+        {
+            title: 'Name',
+            field: 'data.name',
+            
+        },
+        {
+            title: 'Date',
+            field: 'data.date',
+            type: 'datetime',
+            
+
+            render: (rowData) => { return new Date(rowData.data.date._seconds * 1000).toLocaleString('en-US', { month: 'long', weekday: 'long', day: 'numeric' }) }
+        },
+        {
+            title: 'Players',
+            field: 'data.players',
+            grouping: true,
+            render: (rowData) => rowData.data.players.join(' ')
+        },
+        {
+            title: 'Winners',
+            field: 'data.winners',
+            render: (rowData) => rowData.data.winners.join(' ')
+            
+        },
+        {
+            title: 'Notes',
+            field: 'data.notes',
+           
+        },
+    ];
     return (
         <div className={classes.root} id={id}>
             <div className={classes.container}>
@@ -110,12 +161,36 @@ const TableList = ({ id, game }) => {
                 <Modal open={open} close={handleClose} />
 
 
-                <div className={classes.addButton}>
-                    <Fab color="primary" align="left" aria-label="add" onClick={handleOpen} >
-                        <AddIcon />
-                    </Fab>
-                </div>
-            </div>
+
+    return (
+        <div className={classes.root} id={id}>
+            <div className={classes.container}>
+
+                <TableContainer component={Paper} style={{ width: "80vw" }}>
+
+                    <Table className={classes.table} aria-label="simple table" >
+                        <TableHead>
+                            <TableRow>
+                                {columns.map(column => <TableCell key={column} align="left">{column}</TableCell>)}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {game.map((game) => (
+                                <CustomTableCell align='left'
+                                    key={i++}
+                                    name={game.name}
+                                    date={new Date(game.date._seconds * 1000).toLocaleString('en-US', { month: 'long', weekday: 'long', day: 'numeric' })}
+                                    players={game.players}
+                                    winners={game.winners}
+                                    notes={game.notes}
+                                />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                {/* </div> */}
+
+                <Modal open={open} close={handleClose} />
         </div>
     );
 }

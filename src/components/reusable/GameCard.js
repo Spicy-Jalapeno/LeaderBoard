@@ -8,6 +8,7 @@ const useStyles = makeStyles({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
+
 		minWidth: '125px',
 		minHeight: '75px',
 		maxWidth: '150px',
@@ -22,6 +23,7 @@ const useStyles = makeStyles({
 		justifyContent: 'center',
 		minHeight: '70px',
 		minWidth: '75px',
+
 		boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)',
 		scrollbarWidth: "1px"
 	},
