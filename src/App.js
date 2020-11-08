@@ -1,11 +1,9 @@
-<<<<<<< HEAD
-import React from 'react';
-import './App.css';
-=======
-import React, { useEffect } from 'react';
->>>>>>> f4f2611ed1c01c9800c17430617e3f2c5fe3f4af
 
+import React, { useEffect } from 'react';
 import Routes from './Routes';
+import Nav from './components/Nav'
+import Routes from './Routes';
+
 
 
 

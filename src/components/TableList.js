@@ -44,13 +44,12 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-<<<<<<< HEAD
-        width: 'auto'
-=======
         alignItems: "center",
         height: "100vh",
         width: "100vw"
->>>>>>> f4f2611ed1c01c9800c17430617e3f2c5fe3f4af
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw"
     },
     table: {
         minWidth: 650,
@@ -68,17 +67,16 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-<<<<<<< HEAD
+
 const TableList = () => {
     const [playedGames, setPlayedGames] = React.useState([])
-=======
+
 
 const columns = ["Name", "Date", "Players", "Winners", "Notes"]
 
 
 const TableList = ({ id, game }) => {
     const [playedGames, setPlayedGames] = useState([])
->>>>>>> f4f2611ed1c01c9800c17430617e3f2c5fe3f4af
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -88,7 +86,7 @@ const TableList = ({ id, game }) => {
         setOpen(false);
     };
 
-<<<<<<< HEAD
+
     useEffect(() => {
         const fetch = async () => {
             const { data } = await Axios.get('/api/playedgames')
@@ -132,57 +130,6 @@ const TableList = ({ id, game }) => {
            
         },
     ];
-
-    return (
-        <div className={classes.root}>
-            <MaterialTable
-                icons={tableIcons}
-                columns={columns}
-                data={playedGames}
-                title="Games Played"
-                editable={{
-                    onRowDelete: oldData =>
-                        new Promise((resolve, reject) => {
-                            setTimeout(() => {
-                                const dataDelete = [...playedGames];
-                                const index = oldData.tableData.id;
-                                //    console.log(oldData.tableData.date)
-                                Axios.delete(`/api/playedgames/${oldData.id}`)
-                                    .then(res => {
-                                        //  console.log(res);   
-                                    })
-                                dataDelete.splice(index, 1);
-                                setPlayedGames([...dataDelete]);
-                                resolve();
-                            }, 1000)
-                        }),
-                }}
-                options={{
-                    search: true,
-                    pageSize: 10,
-                    pageSizeOptions: [10, 20],
-                    draggable: false,
-                }
-                }
-                actions={[
-                    {
-                        icon: () => (
-                            // <IconButton >
-                                <AddBox  />
-                            // </IconButton>
-                        ),
-                        tooltip: "Add New Game",
-                        isFreeAction: true,
-                        onClick: (event,rowDat) => handleOpen()
-                    },
-                ]}
-
-            />
-            <Modal open={open} close={handleClose} />
-
-
-
-=======
     return (
         <div className={classes.root} id={id}>
             <div className={classes.container}>
@@ -214,13 +161,36 @@ const TableList = ({ id, game }) => {
                 <Modal open={open} close={handleClose} />
 
 
-                <div className={classes.addButton}>
-                    <Fab color="primary" align="left" aria-label="add" onClick={handleOpen} >
-                        <AddIcon />
-                    </Fab>
-                </div>
-            </div>
->>>>>>> f4f2611ed1c01c9800c17430617e3f2c5fe3f4af
+
+    return (
+        <div className={classes.root} id={id}>
+            <div className={classes.container}>
+
+                <TableContainer component={Paper} style={{ width: "80vw" }}>
+
+                    <Table className={classes.table} aria-label="simple table" >
+                        <TableHead>
+                            <TableRow>
+                                {columns.map(column => <TableCell key={column} align="left">{column}</TableCell>)}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {game.map((game) => (
+                                <CustomTableCell align='left'
+                                    key={i++}
+                                    name={game.name}
+                                    date={new Date(game.date._seconds * 1000).toLocaleString('en-US', { month: 'long', weekday: 'long', day: 'numeric' })}
+                                    players={game.players}
+                                    winners={game.winners}
+                                    notes={game.notes}
+                                />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                {/* </div> */}
+
+                <Modal open={open} close={handleClose} />
         </div>
     );
 }

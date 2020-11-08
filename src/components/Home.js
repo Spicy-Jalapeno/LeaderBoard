@@ -1,58 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { Grid, Typography, makeStyles, useMediaQuery } from '@material-ui/core';
-import GameCard from './reusable/GameCard';
-import PlayerTable from './PlayerTable'
-import { Link, animateScroll as scroll } from 'react-scroll'
-import { motion } from 'framer-motion'
-import TableSection from './TableSection';
-import TableList from './TableList'
-
+import PlayerWinsBarChart from './PlayerWinsBarChart'
+import StatCardContainer from './StatCardContainer';
+import GameDistributionPieChart from './GameDistributionPieChart'
+import GamePlayedForm from './GamePlayedForm';
 
 const useStyles = makeStyles({
-	homeContainer: {
-		height: '100vh',
-		width: '100vw',
-		// backgroundColor: "red",
-		// overflowY: "scroll"
-		// overflowX: "none", 
-		// backgroundColor: "red"
+	root: {},
+	graphContainer: {
+		minHeight: "400px",
+		minWidth: "100%",
+		marginTop: "60px",
+		backgroundColor: "lightgreen",
 	},
-	rootContainer: {
-		height: "100vh",
-		width: "100vw",
+	leftGraph: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		minHeight: "25vh",
+		borderRadius: "30px",
 		backgroundColor: "aliceblue"
-		// overflowX: 
 	},
-	container: {
-		marginTop: '25px'
+	rightGraph: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		minHeight: "100%",
+		borderRadius: "30px",
+		// padding: "40px 40px",
+		backgroundColor: "aliceblue"
+
 	},
-	text: {
-		textAlign: 'center',
+	playersContainer: {
+		// minHeight: "100%", 
+		backgroundColor: "red",
+		borderRadius: "30px",
+		// padding: "40px 40px",
+		// marginRight: "30px"
 	},
-	size: {
-		fontSize: '3rem'
+	formContainer: {
+		// minHeight: "100%",
+		// backgroundColor: "red",
+		borderRadius: "30px",
+		// padding: "40px 40px",
+		// marginRight: "30px"
 	},
-	gamesContainer: {
-		maxWidth: "70vw"
-	},
-	square: {
-		position: "absolute",
-		backgroundColor: "lightblue",
-		zIndex: -1
-	},
-	list: {
-		width: "80%",
-		marginTop: "50px",
-		maxHeight: "30%"
+	highlight: {
+		backgroundColor: "aliceblue"
 	}
-});
+})
 
 
 const Home = (props) => {
-	//set state for games\
+	//set state for games
 	const isActive = useMediaQuery("(max-width: 375px)")
-	const [homeData, setHomeData] = useState({ games: [], players: [] });
+	const [homeData, setHomeData] = useState({ games: [], sessions: [], players: [] });
 	const [singleGameData, setSingleGameData] = useState([])
 	const [gameName, setGameName] = useState('')
 	const [clicked, setClicked] = useState(false)
@@ -77,57 +80,72 @@ const Home = (props) => {
 			//I used destructuring here because I knew there was a data object attached to the response
 			//just for readability. Axios is a HTTP client that returns a promise
 			const games = await Axios.get('/api/games');
+			const sessions = await Axios.get('/api/playedgames');
 			const players = await Axios.get('/api/players')
 			//setting state for the new data retrieved
-			// players from the get method contains the id and players data in one array. 
-			// this forEach seperates the data of players into an array playersData to use for the homeData array. 
-			// Easier than refactoring everything. 
-			let playersData = [];
-			players.data.forEach(player => {
-				console.log(player.data)
-				playersData.push(player.data);
-			})
-			 setHomeData({ games: games.data, players: playersData });
-			// console.log(players.data)
+			setHomeData({ games: games.data, sessions: sessions.data, players: players.data });
 		};
 		//call fetch function
-		fetch();
-
+		fetch()
 	}, []);
 
 	return (
-		
 		<>
-			<Grid container direction="row" alignItems="center" className={classes.rootContainer} >
-				<Grid item className={classes.homeContainer}>
-					<Grid container direction="column" alignItems="center" spacing={2} id="test2"  >
-						<Grid item xs={12}>
-							<Typography variant="h1" className={isActive ? classes.size : null}  >LeaderBoard</Typography>
+			<Grid container direction="column" justify="center" alignItems="center">
+				<Grid item xs={12} container justify="space-between">
+					<Grid item>
+						<Typography variant="h4">LeaderBoard</Typography>
+					</Grid>
+					<Grid item>
+						<Typography>test top</Typography>
+					</Grid>
+				</Grid>
+				<Grid item xs={12} container style={{ marginTop: "100px"}}>
+					<Grid item xs={12}>
+						<StatCardContainer />
+					</Grid>
+				</Grid>
+				<Grid item xs={12} container style={{ minHeight: "25vh", marginTop: "50px"}}>
+					<Grid item xs={12} sm={7} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
+							<Typography>Top 5 Players Wins</Typography>
 						</Grid>
-						{/* <Grid item className={classes.container}>
-							<Grid container className={classes.gamesContainer} direction="row" justify="space-evenly" spacing={2}>
-								{homeData.games.map((game) => {
-									return (
-										<Grid item key={game.name} xs={4} s={2} md={2} lg={2} xl={2}>
-											<Link activeClass="active" to="test1" spy={true} smooth="true" duration={1000} onClick={handleClick}>
-												<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-													<GameCard title={game.name} />
-												</motion.div>
-											</Link>
-										</Grid>
-									);
-								})}
-							</Grid>
-						</Grid> */}
-						<Grid item className={classes.list} >
-							{/* some sort of loading wheel maybe */}
-							<PlayerTable data={homeData.players} />
+						<Grid item xs={12} style={{ display: "flex", minHeight: "90%", alignItems: "center", justifyContent: "center"}}>
+							<PlayerWinsBarChart data={homeData.players} />
+						</Grid>
+					</Grid>
+					<Grid item sm={1} ></Grid>
+					<Grid item xs={12} sm={4} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
+							<Typography>Total Game Distribution</Typography>
+						</Grid>
+						<Grid item xs={12} style={{ display: "flex", minHeight: "90%", alignItems: "center", justifyContent: "center"}}>
+							<GameDistributionPieChart data={homeData.sessions}/>
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item >
-					{clicked ? 	<TableSection game={singleGameData} name={gameName} id="test1" /> : null }
-				</Grid> 
+				<Grid item xs={12}  direction="row" container style={{minHeight: "40vh", marginTop: "50px"}} justify="center">
+					<Grid item xs={12} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px", padding: "40px 40px"}} container direction="column">
+						<Grid item>
+							<Typography>Players</Typography>
+						</Grid>
+						{homeData.players.map(player => {
+							return (
+								<Grid item>
+									<Typography>{player.data.firstName}</Typography>
+								</Grid>
+							)
+						})}
+					</Grid>
+					<Grid item xs={1}/>
+					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+						<GamePlayedForm />
+					</Grid>
+					<Grid item xs={1}/>
+					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", }}>
+						<Typography>test3</Typography>
+					</Grid>
+				</Grid>
 			</Grid>
 		</>
 	);

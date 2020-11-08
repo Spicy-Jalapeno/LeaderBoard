@@ -15,7 +15,6 @@ router.get('/', async (req, res, next) => {
 
         const playedGames = await db.collection('Games Played').orderBy('date', "desc").get()
         playedGames.forEach(game => {
-          
             playedGamesSnaps.push({id:game.id, data:game.data()})
             
         })
@@ -42,7 +41,6 @@ router.get('/:name', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-
         const postResult = await db.collection('Games Played')
             .add({
                 name: req.body.name,

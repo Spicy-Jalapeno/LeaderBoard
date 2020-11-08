@@ -17,6 +17,7 @@ router.get('/', async (req, res, next) => {
 
 		// go through each game and push to games array
 		games.forEach((doc) => {
+
 			gamesSnaps.push(doc.data());
 		});
 
@@ -30,17 +31,17 @@ router.get('/', async (req, res, next) => {
 //this route will get game data by id
 router.get('/:id', (req, res, next) => {
 	try {
-	} catch (err) {}
+	} catch (err) { }
 });
 
 //route will add new games to db
 router.post('/', (req, res, next) => {
 	try {
-	} catch (err) {}
+	} catch (err) { }
 });
 
 //route will update game via id
 router.put('/:id', (req, res, next) => {
 	try {
-	} catch (err) {}
+	} catch (err) { }
 });

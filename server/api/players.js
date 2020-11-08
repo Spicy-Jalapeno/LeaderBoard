@@ -66,6 +66,7 @@ router.post('/', (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
     try {
+        console.log("here in players")
         //Increment is a firebase function use to increment fields by whatever number you pass through. 
         let winners = req.body.winners;
         let losers = req.body.losers; 
@@ -79,6 +80,7 @@ router.put('/', async (req, res, next) => {
                 (snapshot) => { 
                     snapshot.forEach(doc => { 
                         playersRef.doc(doc.id).update({totalWins: increment})
+                        console.log(playersRef)
                     })
                 }
             ); 
