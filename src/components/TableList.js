@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: "center",
         height: "100vh",
-        width: "100vw"
+        width: "100vw",
         alignItems: "center",
         height: "100vh",
         width: "100vw"
