@@ -4,6 +4,7 @@ import { Grid, Typography, makeStyles, useMediaQuery } from '@material-ui/core';
 import PlayerWinsBarChart from './PlayerWinsBarChart'
 import StatCardContainer from './StatCardContainer';
 import GameDistributionPieChart from './GameDistributionPieChart'
+import GamePlayedForm from './GamePlayedForm';
 
 const useStyles = makeStyles({
 	root: {},
@@ -137,11 +138,11 @@ const Home = (props) => {
 						})}
 					</Grid>
 					<Grid item xs={1}/>
-					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)" }}>
-						<Typography>Form</Typography>
+					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+						<GamePlayedForm />
 					</Grid>
 					<Grid item xs={1}/>
-					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)"}}>
+					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", }}>
 						<Typography>test3</Typography>
 					</Grid>
 				</Grid>

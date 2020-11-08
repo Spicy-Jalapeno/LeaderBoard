@@ -14,12 +14,8 @@ import InputBase from '@material-ui/core/InputBase'
 
 const useStyles = makeStyles((theme) => ({
     card: {
-        height: '500px',
-        width: '450px',
-        minWidth: '125px',
-        minHeight: '75px',
+        height: '100%',
         borderRadius: '30px',
-        boxShadow: '10px 0px 10px 10px rgba(0, 0, 0, 0.10)'
     },
     root: {
         height: '100%',
@@ -167,7 +163,7 @@ const GamePlayedForm = () => {
     // Submit that will post to the database and reload the window with the new info. 
     const handleSubmit = async (event) => {
         console.log("submitted");
-        event.preventDefault();
+        // event.preventDefault();
         const values = {
             name: gamePicked,
             players: playersName,
@@ -178,7 +174,7 @@ const GamePlayedForm = () => {
         }
         // console.log(values.winners.length)
         //posting to the database.
-         await Axios.post("/api/playedgames", values);
+         
        
         
 
@@ -204,10 +200,10 @@ const GamePlayedForm = () => {
         console.log('Winners')
         console.log(winners)
         
-        await Axios.put(`/api/players/`, {winners: winners, losers: losers})
+        await Promise.all([Axios.put(`/api/players/`, {winners: winners, losers: losers}), Axios.post("/api/playedgames", values)])
             
         //This line reloaded the window(page).
-         window.location.reload(false);
+        //  window.location.reload(false);
     }
 
 

@@ -41,7 +41,7 @@ router.get('/:name', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-
+        console.log("here")
         const postResult = await db.collection('Games Played')
             .add({
                 name: req.body.name,
