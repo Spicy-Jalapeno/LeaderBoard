@@ -72,7 +72,7 @@ const Home = (props) => {
 
 	//useEffect will run on componentMount, anything in here will be called when page loads/reloads/updates
 	useEffect(() => {
-		scroll.scrollToTop({ duration: 200 })
+		
 		//since useEffect can't be async itself, you have to define an async fuction and call
 		//it inside useEffect. This function will hit our api and retrieve the list of games
 		//in the db
