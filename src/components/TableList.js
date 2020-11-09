@@ -67,11 +67,6 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-
-const TableList = () => {
-    const [playedGames, setPlayedGames] = React.useState([])
-
-
 const columns = ["Name", "Date", "Players", "Winners", "Notes"]
 
 
@@ -159,39 +154,8 @@ const TableList = ({ id, game }) => {
                 {/* </div> */}
 
                 <Modal open={open} close={handleClose} />
-
-
-
-    return (
-        <div className={classes.root} id={id}>
-            <div className={classes.container}>
-
-                <TableContainer component={Paper} style={{ width: "80vw" }}>
-
-                    <Table className={classes.table} aria-label="simple table" >
-                        <TableHead>
-                            <TableRow>
-                                {columns.map(column => <TableCell key={column} align="left">{column}</TableCell>)}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {game.map((game) => (
-                                <CustomTableCell align='left'
-                                    key={i++}
-                                    name={game.name}
-                                    date={new Date(game.date._seconds * 1000).toLocaleString('en-US', { month: 'long', weekday: 'long', day: 'numeric' })}
-                                    players={game.players}
-                                    winners={game.winners}
-                                    notes={game.notes}
-                                />
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                {/* </div> */}
-
-                <Modal open={open} close={handleClose} />
-        </div>
+             </div>
+        </div >
     );
 }
 
