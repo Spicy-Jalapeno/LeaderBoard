@@ -31,9 +31,6 @@ const StatCardContainer = (props) => {
     cards.push({title:'Games Played',number:totalNumOfGames,pic:`./assets/Matt.png`})
 
 }   
-    console.log(mostPlayed);
-    console.log(totalNumOfGames);
-    console.log(leader);
     return ( 
         <Grid container direction="row" justify="center" alignContent="center" spacing={5}>
             {cards.map(card => {

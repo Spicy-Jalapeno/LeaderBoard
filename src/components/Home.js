@@ -5,7 +5,8 @@ import PlayerWinsBarChart from './PlayerWinsBarChart'
 import StatCardContainer from './StatCardContainer';
 import GameDistributionPieChart from './GameDistributionPieChart'
 import GamePlayedForm from './GamePlayedForm';
-import SessionsData from './SessionsData';
+import SessionsData from '../utilities/SessionsData'
+import PlayersWins from '../utilities/PlayerWins'
 
 const useStyles = makeStyles({
 	root: {},
@@ -86,6 +87,8 @@ const Home = (props) => {
 			//setting state for the new data retrieved
 			setHomeData({ games: games.data, sessions: sessions.data, players: players.data });
 			SessionsData(sessions.data)
+			PlayersWins(players.data)
+			
 		};
 		//call fetch function
 		fetch()
@@ -115,7 +118,7 @@ const Home = (props) => {
 							<Typography>Top 5 Players Wins</Typography>
 						</Grid>
 						<Grid item xs={12} style={{ display: "flex", minHeight: "90%", alignItems: "center", justifyContent: "center"}}>
-							<PlayerWinsBarChart data={homeData.players} />
+							<PlayerWinsBarChart  />
 						</Grid>
 					</Grid>
 					<Grid item sm={1} ></Grid>

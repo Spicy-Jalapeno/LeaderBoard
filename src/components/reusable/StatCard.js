@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Grid, makeStyles, Typography } from '@material-ui/core'
-import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import Avatar from '@material-ui/core/Avatar'
-import SessionsData from '../SessionsData'
-import useStore from '../../store'
+
 
 const useStyles = makeStyles({
     root: {
