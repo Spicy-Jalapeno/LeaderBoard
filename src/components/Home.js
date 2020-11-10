@@ -5,6 +5,7 @@ import PlayerWinsBarChart from './PlayerWinsBarChart'
 import StatCardContainer from './StatCardContainer';
 import GameDistributionPieChart from './GameDistributionPieChart'
 import GamePlayedForm from './GamePlayedForm';
+import SessionsData from './SessionsData';
 
 const useStyles = makeStyles({
 	root: {},
@@ -59,9 +60,9 @@ const Home = (props) => {
 	const [singleGameData, setSingleGameData] = useState([])
 	const [gameName, setGameName] = useState('')
 	const [clicked, setClicked] = useState(false)
-
+	
 	const classes = useStyles();
-
+	
 	const handleClick = async (event) => {
 		setClicked(true)
 		event.target.tagName === "DIV" ? setGameName(event.target.title) : setGameName(event.target.alt)
@@ -84,10 +85,13 @@ const Home = (props) => {
 			const players = await Axios.get('/api/players')
 			//setting state for the new data retrieved
 			setHomeData({ games: games.data, sessions: sessions.data, players: players.data });
+			SessionsData(sessions.data)
 		};
 		//call fetch function
 		fetch()
 	}, []);
+
+	
 
 	return (
 		<>
@@ -131,7 +135,7 @@ const Home = (props) => {
 						</Grid>
 						{homeData.players.map(player => {
 							return (
-								<Grid item>
+								<Grid item key={player.data.firstName}>
 									<Typography>{player.data.firstName}</Typography>
 								</Grid>
 							)

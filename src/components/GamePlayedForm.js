@@ -226,7 +226,7 @@ const GamePlayedForm = () => {
                 playersName.push(player.data.firstName);
                 playerId.push({id:player.id, firstName: player.data.firstName})
             });
-            console.log(playerId);
+           
             setPlayerId(playerId)
             // setting the local playersName array with the database info.
             setPlayers(playersName);
@@ -238,7 +238,6 @@ const GamePlayedForm = () => {
         <Card className={classes.card}>
             <form className={classes.root} onSubmit={handleSubmit}>
                 <FormGroup className={classes.formGroup} >
-
                     <FormControl className={classes.formControl}  >
                         <InputLabel id="games" className={classes.label} classes={{ shrink: classes.labelShrink, focused: classes.labelFocus }}>Games</InputLabel>
                         <Select
@@ -271,7 +270,7 @@ const GamePlayedForm = () => {
                         <InputLabel id="players" className={classes.label} classes={{ shrink: classes.labelShrink, focused: classes.labelFocus }}>Players</InputLabel>
                         <Select
                             className={classes.select}
-                            classes={{ root: classes.focusSelect, paper:classes.selectMenu }}
+                            classes={{ root: classes.focusSelect}}
                             MenuProps={{ classes: { paper: classes.selectMenu } }}
                             required
                             placeholder="Players"
@@ -319,7 +318,6 @@ const GamePlayedForm = () => {
                                     ))}
                                 </div>
                             )}
-                          
                         >
                             {playersName.map((name) => (
 
@@ -342,7 +340,6 @@ const GamePlayedForm = () => {
                             value={notes}
                             onChange={changeNotes}
                             inputProps={{ className: classes.textArea, maxLength: 120 }}
-
                         />
                     </FormControl>
                     <Button

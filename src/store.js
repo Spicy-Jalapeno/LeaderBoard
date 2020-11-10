@@ -10,7 +10,10 @@ const useStore = create(set => ({
     fetchGames: async () => {
         const { data } = await Axios.get('/api/games/')
         set({ games: data })
-    }
+    },
+    totalSessions:[],
+    playersWins:[], //contains names and totalWins for each player. 
+    
 }))
 
 export default useStore
