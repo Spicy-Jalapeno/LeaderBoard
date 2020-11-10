@@ -235,7 +235,7 @@ const GamePlayedForm = () => {
         fetch()
     }, [])
     return (
-        <Card className={classes.card}>
+        // <Card className={classes.card}>
             <form className={classes.root} onSubmit={handleSubmit}>
                 <FormGroup className={classes.formGroup} >
 
@@ -354,7 +354,7 @@ const GamePlayedForm = () => {
                     </Button>
                 </FormGroup>
             </form>
-        </Card>
+        // </Card>
 
     );
 

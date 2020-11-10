@@ -46,8 +46,16 @@ const useStyles = makeStyles({
 		// padding: "40px 40px",
 		// marginRight: "30px"
 	},
-	highlight: {
-		backgroundColor: "aliceblue"
+	bottomRow: {
+		minHeight: "35vh", 
+		marginTop: "50px"
+	},
+	middleRow: {
+		marginTop: "50px"
+	},
+	card: {
+		boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)",
+		borderRadius: "30px"	
 	}
 })
 
@@ -91,7 +99,7 @@ const Home = (props) => {
 
 	return (
 		<>
-			<Grid container direction="column" justify="center" alignItems="center" >
+			<Grid container direction="column" justify="center" alignItems="center" spacing={4}>
 				<Grid item xs={12} container justify="space-between">
 					<Grid item>
 						<Typography variant="h4">LeaderBoard</Typography>
@@ -105,8 +113,8 @@ const Home = (props) => {
 						<StatCardContainer />
 					</Grid>
 				</Grid>
-				<Grid item xs={12} container style={{marginTop: "50px"}} spacing={2}>
-					<Grid item xs={12} sm={12} md={7} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+				<Grid item xs={12} container className={classes.middleRow} spacing={2}>
+					<Grid item xs={12} sm={12} md={7} container className={classes.card}>
 						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
 							<Typography>Top 5 Players Wins</Typography>
 						</Grid>
@@ -115,7 +123,7 @@ const Home = (props) => {
 						</Grid>
 					</Grid>
 					<Grid item sm={1} />
-					<Grid item xs={12} sm={12} md={4} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+					<Grid item xs={12} sm={12} md={4} container className={classes.card}>
 						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
 							<Typography>Total Game Distribution</Typography>
 						</Grid>
@@ -124,8 +132,8 @@ const Home = (props) => {
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item xs={12}  direction="row" container style={{minHeight: "40vh", marginTop: "50px"}} justify="center">
-					<Grid item xs={12} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px", padding: "40px 40px"}} container direction="column">
+				<Grid item xs={12} container className={classes.bottomRow} justify="space-evenly" spacing={5}>
+					<Grid item xs={12} sm={3} className={classes.card} container direction="column">
 						<Grid item>
 							<Typography>Players</Typography>
 						</Grid>
@@ -137,12 +145,10 @@ const Home = (props) => {
 							)
 						})}
 					</Grid>
-					<Grid item xs={1}/>
-					<Grid item xs={12} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+					<Grid item xs={12} sm={3} className={classes.card}>
 						<GamePlayedForm />
 					</Grid>
-					<Grid item xs={1}/>
-					<Grid item xs={12} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", }}>
+					<Grid item xs={12} sm={3} className={classes.card}>						
 						<Typography>test3</Typography>
 					</Grid>
 				</Grid>
