@@ -26,17 +26,17 @@ const StatCardContainer = (props) => {
     });
     
    
-    cards.push({title:'Most Played Game',number:mostPlayed.played,pic:`./assets/${mostPlayed.name}.png`})
-    cards.push({title:'Leader',number:leader.wins,pic:`./assets/${leader.name}.png`})
-    cards.push({title:'Games Played',number:totalNumOfGames,pic:`./assets/Matt.png`})
+    cards.push({title:'Most Played Game',number:mostPlayed.played,icon:`./assets/${mostPlayed.name}.png`})
+    cards.push({title:'Leader',number:leader.wins,icon:`./assets/${leader.name}.png`})
+    cards.push({title:'Games Played',number:totalNumOfGames, icon:`./assets/Matt.png`})
 
 }   
     return ( 
         <Grid container direction="row" justify="space-evenly" alignContent="center" spacing={4}>
-            {titles.map(title => {
+            {cards.map(card => {
                 return (
-                    <Grid item xs={10} sm={6} md={2}>
-                        <StatCard title={title} number={"100"} />
+                    <Grid item xs={10} sm={6} md={2} key={card.title}>
+                        <StatCard title={card.title} number={card.number} icon={card.icon} />
                     </Grid>
                 )
             })}

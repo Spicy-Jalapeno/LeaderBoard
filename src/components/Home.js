@@ -108,7 +108,7 @@ const Home = (props) => {
 							<Typography>Total Game Distribution</Typography>
 						</Grid>
 						<Grid item xs={12} className={classes.graphs}>
-							<GameDistributionPieChart data={homeData.sessions}/>
+							<GameDistributionPieChart />
 						</Grid>
 					</Grid>
 				</Grid>
