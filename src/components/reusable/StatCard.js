@@ -20,17 +20,7 @@ const useStyles = makeStyles({
        
     },
     rightContainer: {
-        minWidth: "40%",
-        // backgroundColor: "red"
-    },
-    // leftContent: {    
-    // minHeight: "100%",
-    // backgroundColor: "green"
-    // }
-    avatar:{
-       width:'70px',
-       height:'70px',
-       
+        minWidth: "30%",
     },
 })
 

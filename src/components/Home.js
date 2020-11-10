@@ -9,47 +9,28 @@ import SessionsData from '../utilities/SessionsData'
 import PlayersWins from '../utilities/PlayerWins'
 
 const useStyles = makeStyles({
-	root: {},
-	graphContainer: {
-		minHeight: "400px",
-		minWidth: "100%",
-		marginTop: "60px",
-		backgroundColor: "lightgreen",
-	},
-	leftGraph: {
+	graphContainers: {
 		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-		minHeight: "25vh",
-		borderRadius: "30px",
-		backgroundColor: "aliceblue"
+		maxHeight: "20%", 
+		marginLeft: "50px", 
+		marginTop: "15px"
 	},
-	rightGraph: {
+	graphs: {
 		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-		minHeight: "100%",
-		borderRadius: "30px",
-		// padding: "40px 40px",
-		backgroundColor: "aliceblue"
-
+		minHeight: "90%", 
+		alignItems: "center", 
+		justifyContent: "center"
 	},
-	playersContainer: {
-		// minHeight: "100%", 
-		backgroundColor: "red",
-		borderRadius: "30px",
-		// padding: "40px 40px",
-		// marginRight: "30px"
+	bottomRow: {
+		minHeight: "35vh", 
+		marginTop: "50px"
 	},
-	formContainer: {
-		// minHeight: "100%",
-		// backgroundColor: "red",
-		borderRadius: "30px",
-		// padding: "40px 40px",
-		// marginRight: "30px"
+	middleRow: {
+		marginTop: "50px"
 	},
-	highlight: {
-		backgroundColor: "aliceblue"
+	card: {
+		boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)",
+		borderRadius: "30px"	
 	}
 })
 
@@ -98,7 +79,7 @@ const Home = (props) => {
 
 	return (
 		<>
-			<Grid container direction="column" justify="center" alignItems="center">
+			<Grid container direction="column" justify="center" alignItems="center" spacing={4}>
 				<Grid item xs={12} container justify="space-between">
 					<Grid item>
 						<Typography variant="h4">LeaderBoard</Typography>
@@ -112,27 +93,27 @@ const Home = (props) => {
 						<StatCardContainer />
 					</Grid>
 				</Grid>
-				<Grid item xs={12} container style={{ minHeight: "25vh", marginTop: "50px"}}>
-					<Grid item xs={12} sm={7} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
-						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
+				<Grid item xs={12} container className={classes.middleRow} spacing={2}>
+					<Grid item xs={12} sm={12} md={7} container className={classes.card}>
+						<Grid item xs={12} className={classes.graphContainers}>
 							<Typography>Top 5 Players Wins</Typography>
 						</Grid>
-						<Grid item xs={12} style={{ display: "flex", minHeight: "90%", alignItems: "center", justifyContent: "center"}}>
-							<PlayerWinsBarChart  />
+						<Grid item xs={12} className={classes.graphs}>
+							<PlayerWinsBarChart />
 						</Grid>
 					</Grid>
-					<Grid item sm={1} ></Grid>
-					<Grid item xs={12} sm={4} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
-						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
+					<Grid item sm={1} />
+					<Grid item xs={12} sm={12} md={4} container className={classes.card}>
+						<Grid item xs={12} className={classes.graphContainers}>
 							<Typography>Total Game Distribution</Typography>
 						</Grid>
-						<Grid item xs={12} style={{ display: "flex", minHeight: "90%", alignItems: "center", justifyContent: "center"}}>
+						<Grid item xs={12} className={classes.graphs}>
 							<GameDistributionPieChart data={homeData.sessions}/>
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item xs={12}  direction="row" container style={{minHeight: "40vh", marginTop: "50px"}} justify="center">
-					<Grid item xs={12} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px", padding: "40px 40px"}} container direction="column">
+				<Grid item xs={12} container className={classes.bottomRow} justify="space-evenly" spacing={5}>
+					<Grid item xs={12} sm={3} className={classes.card} container direction="column">
 						<Grid item>
 							<Typography>Players</Typography>
 						</Grid>
@@ -144,12 +125,10 @@ const Home = (props) => {
 							)
 						})}
 					</Grid>
-					<Grid item xs={1}/>
-					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+					<Grid item xs={12} sm={3} className={classes.card}>
 						<GamePlayedForm />
 					</Grid>
-					<Grid item xs={1}/>
-					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", }}>
+					<Grid item xs={12} sm={3} className={classes.card}>						
 						<Typography>test3</Typography>
 					</Grid>
 				</Grid>
