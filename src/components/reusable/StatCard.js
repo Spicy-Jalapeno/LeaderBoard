@@ -8,7 +8,6 @@ const useStyles = makeStyles({
         marginTop: "20px",
         minHeight: "100px",
         minWidth: "200px",
-       
         background: "linear-gradient(145deg, #e6e6e6, #ffffff)",
         boxShadow: "26px 26px 52px #d9d9d9, -26px -26px 52px #ffffff",
         borderRadius: "30px"
@@ -20,12 +19,7 @@ const useStyles = makeStyles({
     },
     rightContainer: {
         minWidth: "30%",
-        // backgroundColor: "red"
     },
-    // leftContent: {    
-    // minHeight: "100%",
-    // backgroundColor: "green"
-    // }
 })
 
 const StatCard = ({number, title, icon}) => {
