@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid, Typography, makeStyles, Button } from '@material-ui/core';
 import TableList from './TableList';
-import { Link } from 'react-scroll';
 
 const useStyles = makeStyles({
 	container: {
