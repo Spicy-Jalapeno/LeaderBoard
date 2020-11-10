@@ -6,10 +6,10 @@ const titles = ["Games Played", "Most Played Game", "Leader"]
 
 const StatCardContainer = (props) => {
     return ( 
-        <Grid container direction="row" justify="center" alignContent="center" spacing={5}>
+        <Grid container direction="row" justify="center" alignContent="center" spacing={4}>
             {titles.map(title => {
                 return (
-                    <Grid item>
+                    <Grid item xs={10} sm={6} md={2}>
                         <StatCard title={title} number={"100"} />
                     </Grid>
                 )

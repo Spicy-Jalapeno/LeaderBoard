@@ -91,7 +91,7 @@ const Home = (props) => {
 
 	return (
 		<>
-			<Grid container direction="column" justify="center" alignItems="center">
+			<Grid container direction="column" justify="center" alignItems="center" >
 				<Grid item xs={12} container justify="space-between">
 					<Grid item>
 						<Typography variant="h4">LeaderBoard</Typography>
@@ -105,8 +105,8 @@ const Home = (props) => {
 						<StatCardContainer />
 					</Grid>
 				</Grid>
-				<Grid item xs={12} container style={{ minHeight: "25vh", marginTop: "50px"}}>
-					<Grid item xs={12} sm={7} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+				<Grid item xs={12} container style={{marginTop: "50px"}} spacing={2}>
+					<Grid item xs={12} sm={12} md={7} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
 						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
 							<Typography>Top 5 Players Wins</Typography>
 						</Grid>
@@ -114,8 +114,8 @@ const Home = (props) => {
 							<PlayerWinsBarChart data={homeData.players} />
 						</Grid>
 					</Grid>
-					<Grid item sm={1} ></Grid>
-					<Grid item xs={12} sm={4} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+					<Grid item sm={1} />
+					<Grid item xs={12} sm={12} md={4} container style={{ boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
 						<Grid item xs={12} style={{ display: "flex", maxHeight: "20%", marginLeft: "50px", marginTop: "15px"}}>
 							<Typography>Total Game Distribution</Typography>
 						</Grid>
@@ -138,11 +138,11 @@ const Home = (props) => {
 						})}
 					</Grid>
 					<Grid item xs={1}/>
-					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
+					<Grid item xs={12} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", borderRadius: "30px"}}>
 						<GamePlayedForm />
 					</Grid>
 					<Grid item xs={1}/>
-					<Grid item xs={1} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", }}>
+					<Grid item xs={12} sm={3} style={{boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)", }}>
 						<Typography>test3</Typography>
 					</Grid>
 				</Grid>
