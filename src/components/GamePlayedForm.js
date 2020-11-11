@@ -10,7 +10,7 @@ import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
 import InputBase from '@material-ui/core/InputBase'
-
+import {motion} from 'framer-motion'
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -26,16 +26,17 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-evenly'
     },
     formControl: {
-        width: '95%',// margin: theme.spacing(1),
+        width: '100%',// margin: theme.spacing(1),
         minWidth: 120,
         boxShadow: ' 0px 10px 10px rgba(0, 0, 0, 0.10)',
         borderRadius: '30px',
         alignSelf: 'center'
     },
     chips: {
-        display: 'flex',
+        // display: 'flex',
         flexWrap: 'wrap',
         marginLeft: '20px',
+        overFlow:'hidden',
        
     },
     chip: {
@@ -74,13 +75,13 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         minHeight: '40px',
-        boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)',
+        boxShadow: ' 0px 10px 10px rgba(0, 0, 0, 0.10)',
         borderRadius: '30px',
         maxHeight: '90px'
     },
     textArea: {
-        marginLeft: '10px',
-        padding: '0px 10px 10px 10px ',
+        marginLeft: '20px',
+       
         scrollBehavior: 'none',
         '&::placeholder': {
             color: 'lightblue',
@@ -89,9 +90,9 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     button: {
-
+        borderRadius:'20px',
         alignSelf: 'center',
-        width: '85%',
+        width: '100%',
         boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.10)',
         background: 'lightblue',
         color: '#FFF',
@@ -118,7 +119,7 @@ function getStyles(name, personName, theme) {
 
 
 
-const GamePlayedForm = () => {
+const GamePlayedForm = ({opened}) => {
     // Arrays  containing response data from GET. 
     const [players, setPlayers] = React.useState([]);
     const [games, setGames] = React.useState([]);
@@ -234,10 +235,36 @@ const GamePlayedForm = () => {
         }
         fetch()
     }, [])
+    const formAni = { 
+        hidden: { display: 'none', x:-300},
+        visible: {display:'unset', x:0}
+    }
+    const gamesAni = {
+        hidden: { display: 'none', x: -300 },
+        visible: { display:'unset', originX: -100, originY:-100, x:0,y:0},
+      }
+      const playersAni = {
+        hidden: { display: 'none', x: -300 },
+        visible: { display:'unset', x: 0, y:-0},
+      }
+      const winnersAni = {
+        hidden: { display: 'none', x: -300 },
+        visible: { display:'unset', x: 0, y:0 },
+      }
+      const notesAni = {
+        hidden: { display: 'none', x: -300 },
+        visible: { display:'unset', x: 0, y:0 },
+      }
+      const sumbitAni = {
+        hidden: { display: 'none', x: -300 },
+        visible: { display:'unset', originX: 0, y:0},
+      }
     return (
         // <Card className={classes.card}>
+        <motion.div className={classes.root} variants={formAni} initial='hidden' animate={opened ? 'visible' : 'hidden'} layout>
             <form className={classes.root} onSubmit={handleSubmit}>
                 <FormGroup className={classes.formGroup} >
+                <motion.div  className={classes.formControl} variants={gamesAni} initial='hidden' animate={opened ? 'visible' : 'hidden'}>
                     <FormControl className={classes.formControl}  >
                         <InputLabel id="games" className={classes.label} classes={{ shrink: classes.labelShrink, focused: classes.labelFocus }}>Games</InputLabel>
                         <Select
@@ -266,6 +293,8 @@ const GamePlayedForm = () => {
 
                         </Select>
                     </FormControl>
+                    </motion.div>
+                    <motion.div className={classes.formControl} variants={playersAni} initial='hidden' animate={(gamePicked != '') ? 'visible' : 'hidden'}>
                     <FormControl className={classes.formControl} >
                         <InputLabel id="players" className={classes.label} classes={{ shrink: classes.labelShrink, focused: classes.labelFocus }}>Players</InputLabel>
                         <Select
@@ -297,6 +326,8 @@ const GamePlayedForm = () => {
                             ))}
                         </Select>
                     </FormControl>
+                    </motion.div>
+                    <motion.div className={classes.formControl} variants={winnersAni} initial='hidden' animate={(playersName.length != 0) ? 'visible' : 'hidden'}>
                     <FormControl className={classes.formControl}>
                         <InputLabel id="winners" className={classes.label} classes={{ shrink: classes.labelShrink, focused: classes.labelFocus }}>Winner(s)</InputLabel>
                         <Select
@@ -327,21 +358,25 @@ const GamePlayedForm = () => {
                             ))}
                         </Select>
                     </FormControl>
+                    </motion.div>
+                    <motion.div className={classes.formControl} variants={notesAni} initial='hidden' animate={(winnersName.length != 0) ? 'visible' : 'hidden'}>
                     <FormControl className={classes.formControl}>
+                    <InputLabel id="notes" className={classes.label} classes={{ shrink: classes.labelShrink, focused: classes.labelFocus }}>Notes</InputLabel>
                         <InputBase
                             className={classes.text}
-                            // required
-                            id="notes"
-                            label="Notes"
-                            placeholder="Write notes here"
+                           
+                           
                             multiline
                             rowsMax={3}
                             spellCheck={true}
                             value={notes}
                             onChange={changeNotes}
-                            inputProps={{ className: classes.textArea, maxLength: 120 }}
+                            inputProps={{ className: classes.textArea, maxLength: 30 }}
                         />
                     </FormControl>
+                    </motion.div>
+                    <motion.div  className={classes.button} variants={sumbitAni} initial='hidden' animate={(notes != '') ? 'visible' : 'hidden'}>
+                        
                     <Button
                         type="submit"
                         variant="contained"
@@ -349,9 +384,10 @@ const GamePlayedForm = () => {
                     >
                         Create Game
                     </Button>
+                    </motion.div>
                 </FormGroup>
             </form>
-        // </Card>
+            </motion.div>
 
     );
 

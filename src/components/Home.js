@@ -7,32 +7,45 @@ import GameDistributionPieChart from './GameDistributionPieChart'
 import GamePlayedForm from './GamePlayedForm';
 import SessionsData from '../utilities/SessionsData'
 import PlayersWins from '../utilities/PlayerWins'
+import AddIcon from '@material-ui/icons/Add'
+import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
 
 const useStyles = makeStyles({
 	graphContainers: {
 		display: "flex",
-		maxHeight: "20%", 
-		marginLeft: "50px", 
+		maxHeight: "20%",
+		marginLeft: "50px",
 		marginTop: "15px"
 	},
 	graphs: {
 		display: "flex",
-		minHeight: "90%", 
-		alignItems: "center", 
+		minHeight: "90%",
+		alignItems: "center",
 		justifyContent: "center"
 	},
 	bottomRow: {
-		minHeight: "35vh", 
-		marginTop: "50px"
+		minHeight: "50vh",
+		marginTop: "50px",
+
 	},
 	middleRow: {
 		marginTop: "50px"
 	},
 	card: {
 		boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)",
-		borderRadius: "30px"	
+		borderRadius: "30px",
+		padding: '10px !important',
+
+	},
+	buttonGroup:{
+		display:'flex',
+		flexDirection:"column"
 	}
+
 })
+
+
 
 
 const Home = (props) => {
@@ -42,9 +55,9 @@ const Home = (props) => {
 	const [singleGameData, setSingleGameData] = useState([])
 	const [gameName, setGameName] = useState('')
 	const [clicked, setClicked] = useState(false)
-	
+	const [opened, setOpen] = useState(false);
 	const classes = useStyles();
-	
+
 	const handleClick = async (event) => {
 		setClicked(true)
 		event.target.tagName === "DIV" ? setGameName(event.target.title) : setGameName(event.target.alt)
@@ -55,7 +68,7 @@ const Home = (props) => {
 
 	//useEffect will run on componentMount, anything in here will be called when page loads/reloads/updates
 	useEffect(() => {
-		
+
 		//since useEffect can't be async itself, you have to define an async fuction and call
 		//it inside useEffect. This function will hit our api and retrieve the list of games
 		//in the db
@@ -69,13 +82,13 @@ const Home = (props) => {
 			setHomeData({ games: games.data, sessions: sessions.data, players: players.data });
 			SessionsData(sessions.data)
 			PlayersWins(players.data)
-			
+
 		};
 		//call fetch function
 		fetch()
 	}, []);
 
-	
+
 
 	return (
 		<>
@@ -88,7 +101,7 @@ const Home = (props) => {
 						<Typography>test top</Typography>
 					</Grid>
 				</Grid>
-				<Grid item xs={12} container style={{ marginTop: "100px"}}>
+				<Grid item xs={12} container style={{ marginTop: "100px" }}>
 					<Grid item xs={12}>
 						<StatCardContainer />
 					</Grid>
@@ -125,10 +138,26 @@ const Home = (props) => {
 							)
 						})}
 					</Grid>
+					<Grid item xs={12} sm={3} container justify='center' alignItems='center' className={classes.card}>
+
+						{/* <Grid item container justify='center' alignItems='center' style={{height:'100%'}}> */}
+						<ButtonGroup
+							orientation="vertical"
+							color="primary"
+							style={{display: opened ? 'none' : 'inline-flex'}}
+							className={classes.ButtonGroup}
+							
+						>
+							<Button startIcon={<AddIcon />}>Game</Button>
+							<Button startIcon={<AddIcon />}>Player</Button>
+							<Button startIcon={<AddIcon />} onClick={()=>setOpen(true)}>Game Session</Button>
+
+						</ButtonGroup>
+
+						<GamePlayedForm opened={opened}/>
+						
+								</Grid>
 					<Grid item xs={12} sm={3} className={classes.card}>
-						<GamePlayedForm />
-					</Grid>
-					<Grid item xs={12} sm={3} className={classes.card}>						
 						<Typography>test3</Typography>
 					</Grid>
 				</Grid>
