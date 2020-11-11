@@ -10,6 +10,7 @@ import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
 import InputBase from '@material-ui/core/InputBase'
+import { motion } from 'framer-motion'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
     },
     formGroup: {
         height: '100%',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+        overflow: "hidden"
     },
     formControl: {
         width: '95%',// margin: theme.spacing(1),
@@ -238,9 +240,10 @@ const GamePlayedForm = () => {
         // <Card className={classes.card}>
             <form className={classes.root} onSubmit={handleSubmit}>
                 <FormGroup className={classes.formGroup} >
-
+                <motion.div animate={{x: 0}} initial={{x: 1000}} transition={{duration: 1}}> 
                     <FormControl className={classes.formControl}  >
                         <InputLabel id="games" className={classes.label} classes={{ shrink: classes.labelShrink, focused: classes.labelFocus }}>Games</InputLabel>
+                       
                         <Select
                             // classes={{ root: classes.select }}
                             className={classes.select}
@@ -267,6 +270,7 @@ const GamePlayedForm = () => {
 
                         </Select>
                     </FormControl>
+                </motion.div>
                     <FormControl className={classes.formControl} >
                         <InputLabel id="players" className={classes.label} classes={{ shrink: classes.labelShrink, focused: classes.labelFocus }}>Players</InputLabel>
                         <Select

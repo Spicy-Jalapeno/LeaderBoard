@@ -9,6 +9,9 @@ const font = 'Rubik, sans-serif'
 const theme = createMuiTheme({
 	typography: {
 		fontFamily: font
+	},
+	palette: {
+		type: "dark"
 	}
 })
 
@@ -17,6 +20,6 @@ ReactDOM.render(
 		<Router>
 			<App />
 		</Router>
-	</ThemeProvider>,
+	 </ThemeProvider>,
 	document.getElementById('root')
 );

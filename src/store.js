@@ -10,7 +10,9 @@ const useStore = create(set => ({
     fetchGames: async () => {
         const { data } = await Axios.get('/api/games/')
         set({ games: data })
-    }
+    },
+    darkMode: true,
+    setDarkMode: () => {}
 }))
 
 export default useStore

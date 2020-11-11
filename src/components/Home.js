@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { Grid, Typography, makeStyles, useMediaQuery } from '@material-ui/core';
+import { Grid, Typography, makeStyles, useMediaQuery, ThemeProvider, createMuiTheme, Paper, CssBaseline, Button } from '@material-ui/core';
 import PlayerWinsBarChart from './PlayerWinsBarChart'
 import StatCardContainer from './StatCardContainer';
 import GameDistributionPieChart from './GameDistributionPieChart'
 import GamePlayedForm from './GamePlayedForm';
+import useStore from '../store'
 
 const useStyles = makeStyles({
 	graphContainers: {
 		display: "flex",
 		maxHeight: "20%", 
 		marginLeft: "50px", 
-		marginTop: "15px"
+		// marginTop: "15px"
 	},
 	graphs: {
 		display: "flex",
@@ -20,36 +21,55 @@ const useStyles = makeStyles({
 		justifyContent: "center"
 	},
 	bottomRow: {
-		minHeight: "35vh", 
-		marginTop: "50px"
+		minHeight: "30vh", 
+		// marginTop: "50px"
 	},
 	middleRow: {
-		marginTop: "50px"
+		// marginTop: "25px",
+		maxHeight: "30vh"
 	},
 	card: {
 		boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)",
-		borderRadius: "30px"	
+		borderRadius: "30px",
+		backgroundColor: "#333",
+		// maxHeight: "30vh"
+	},
+	darkMode: {
+		backgroundColor: "#424242",
+		color: "white",
+		height: "100vh", 
+		overflowX: "hidden", 
+		overflowY: "hidden"
+	},
+	lightMode: {
+		height: "100vh", 
+		overflowX: "hidden", 
+		overflowY: "hidden",
+		backgroundColor: "white"
 	}
 })
 
 
 const Home = (props) => {
 	//set state for games
-	const isActive = useMediaQuery("(max-width: 375px)")
 	const [homeData, setHomeData] = useState({ games: [], sessions: [], players: [] });
-	const [singleGameData, setSingleGameData] = useState([])
-	const [gameName, setGameName] = useState('')
-	const [clicked, setClicked] = useState(false)
+	const darkMode = useStore(state => state.darkMode)
+	const setDarkMode = useStore(state => state.setDarkMode)
+	const darkTheme = createMuiTheme({
+		palette: {
+			type: "dark"
+		}
+	})
+	const theme = darkMode ? darkTheme : null
+	
+	
 
 	const classes = useStyles();
 
-	const handleClick = async (event) => {
-		setClicked(true)
-		event.target.tagName === "DIV" ? setGameName(event.target.title) : setGameName(event.target.alt)
-		const { data } = await Axios.get(`/api/playedgames/${event.target.alt}`)
-		setSingleGameData(data)
-
+	const handleThemeChange = () => {
+		useStore.setState({ darkMode: !darkMode})
 	}
+
 
 	//useEffect will run on componentMount, anything in here will be called when page loads/reloads/updates
 	useEffect(() => {
@@ -69,65 +89,66 @@ const Home = (props) => {
 		//call fetch function
 		fetch()
 	}, []);
+	console.log(darkMode)
 
 	return (
-		<>
-			<Grid container direction="column" justify="center" alignItems="center" spacing={4}>
+		<div className={darkMode ? classes.darkMode : classes.lightMode}>
+			<Grid container style={{height: "100%", paddingLeft: "50px", paddingRight: "50px"}} spacing={4}>
 				<Grid item xs={12} container justify="space-between">
 					<Grid item>
 						<Typography variant="h4">LeaderBoard</Typography>
 					</Grid>
 					<Grid item>
-						<Typography>test top</Typography>
+						<Button onClick={handleThemeChange}>Change theme</Button>
 					</Grid>
 				</Grid>
-				<Grid item xs={12} container style={{ marginTop: "100px"}}>
-					<Grid item xs={12}>
-						<StatCardContainer />
+					<Grid item xs={12} container style={{marginTop: "50px"}}>
+						<Grid item xs={12}>
+							<StatCardContainer />
+						</Grid>
+					</Grid>
+					<Grid item xs={12} container className={classes.middleRow} spacing={2}>
+						<Grid item xs={12} sm={12} md={7} container className={classes.card}>
+							<Grid item xs={12} className={classes.graphContainers}>
+								<Typography>Top 5 Players Wins</Typography>
+							</Grid>
+							<Grid item xs={12} className={classes.graphs}>
+								<PlayerWinsBarChart data={homeData.players} />
+							</Grid>
+						</Grid>
+						<Grid item sm={1} />
+						<Grid item xs={12} sm={12} md={4} container className={classes.card}>
+							<Grid item xs={12} className={classes.graphContainers}>
+								<Typography>Total Game Distribution</Typography>
+							</Grid>
+							<Grid item xs={12} className={classes.graphs}>
+								<GameDistributionPieChart data={homeData.sessions}/>
+							</Grid>
+						</Grid>
+					</Grid>
+					<Grid item xs={12} container className={classes.bottomRow} justify="space-evenly" spacing={5}>
+						<Grid item xs={12} sm={3} className={classes.card} container direction="column" alignContent="center">
+							<Grid item>
+								<Typography>Players</Typography>
+							</Grid>
+							{homeData.players.map(player => {
+								return (
+									<Grid item>
+										<Typography>{player.data.firstName}</Typography>
+									</Grid>
+								)
+							})}
+						</Grid>
+						<Grid item xs={12} sm={3} className={classes.card} container direction="column" alignContent="center" justify="center">
+							<GamePlayedForm />
+						</Grid>
+						<Grid item xs={12} sm={3} className={classes.card}>						
+							<Typography>test3</Typography>
+						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item xs={12} container className={classes.middleRow} spacing={2}>
-					<Grid item xs={12} sm={12} md={7} container className={classes.card}>
-						<Grid item xs={12} className={classes.graphContainers}>
-							<Typography>Top 5 Players Wins</Typography>
-						</Grid>
-						<Grid item xs={12} className={classes.graphs}>
-							<PlayerWinsBarChart data={homeData.players} />
-						</Grid>
-					</Grid>
-					<Grid item sm={1} />
-					<Grid item xs={12} sm={12} md={4} container className={classes.card}>
-						<Grid item xs={12} className={classes.graphContainers}>
-							<Typography>Total Game Distribution</Typography>
-						</Grid>
-						<Grid item xs={12} className={classes.graphs}>
-							<GameDistributionPieChart data={homeData.sessions}/>
-						</Grid>
-					</Grid>
-				</Grid>
-				<Grid item xs={12} container className={classes.bottomRow} justify="space-evenly" spacing={5}>
-					<Grid item xs={12} sm={3} className={classes.card} container direction="column">
-						<Grid item>
-							<Typography>Players</Typography>
-						</Grid>
-						{homeData.players.map(player => {
-							return (
-								<Grid item>
-									<Typography>{player.data.firstName}</Typography>
-								</Grid>
-							)
-						})}
-					</Grid>
-					<Grid item xs={12} sm={3} className={classes.card}>
-						<GamePlayedForm />
-					</Grid>
-					<Grid item xs={12} sm={3} className={classes.card}>						
-						<Typography>test3</Typography>
-					</Grid>
-				</Grid>
-			</Grid>
-		</>
-	);
+			</div>
+	)
 };
 
 export default Home;

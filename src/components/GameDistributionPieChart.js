@@ -29,7 +29,7 @@ const GameDistributionPieChart = ({data}) => {
                 </Pie>
                 <Tooltip />
             </PieChart>
-        </ResponsiveContainer>
+         </ResponsiveContainer>
      );
 }
  

@@ -8,8 +8,7 @@ const useStyles = makeStyles({
         marginTop: "20px",
         minHeight: "100px",
         minWidth: "200px",
-        background: "linear-gradient(145deg, #e6e6e6, #ffffff)",
-        boxShadow: "26px 26px 52px #d9d9d9, -26px -26px 52px #ffffff",
+        boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.35)",
         borderRadius: "30px"
     },
     leftContainer: {

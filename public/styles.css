@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
 body {
-    margin: 10px 50px; 
-    padding: 0;
-    overflow-x: hidden;
+    /* margin: 10px 50px;  */
+    margin: 0;
     /* position: relative; */
+}
